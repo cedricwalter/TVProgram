@@ -27,7 +27,6 @@ class TVGuide {
                         programs.add(program);
                     }
                 }
-
             }
         }
 
