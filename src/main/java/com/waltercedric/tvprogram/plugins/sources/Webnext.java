@@ -8,6 +8,7 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.waltercedric.tvprogram.TVProgram;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,31 +16,13 @@ import java.util.List;
 
 public class Webnext implements TVProgramBuilder {
 
-
-
-
     public List<TVProgram> getTodayProgram() {
         List<TVProgram> programs = new ArrayList<>();
 
         try {
+            URL feedUrl = getTodayFeedURL();
+
             FeedFetcherCache feedInfoCache = new HashMapFeedInfoCache();
-
-            LocalDateTime now= LocalDateTime.now();
-
-            String monthValue = String.valueOf(now.getMonthValue());
-            if (now.getMonthValue() < 10) {
-                monthValue = "0" + now.getMonthValue();
-            }
-
-            String dayOfMonth = String.valueOf(now.getDayOfMonth());
-            if (now.getDayOfMonth() < 10) {
-                dayOfMonth = "0" + now.getDayOfMonth();
-            }
-
-
-            String spec = "https://webnext.fr/epg_cache/programme-tv-rss_" + now.getYear() + "-" + monthValue + "-" + dayOfMonth + ".xml";
-
-            URL feedUrl = new URL(spec);
             // retrieve the feed the first time
             // any subsequent request will use conditional gets and only
             // retrieve the resource if it has changed
@@ -58,6 +41,22 @@ public class Webnext implements TVProgramBuilder {
         }
 
         return programs;
+    }
+
+    private URL getTodayFeedURL() throws MalformedURLException {
+        LocalDateTime now = LocalDateTime.now();
+
+        String monthValue = String.valueOf(now.getMonthValue());
+        if (now.getMonthValue() < 10) {
+            monthValue = "0" + now.getMonthValue();
+        }
+
+        String dayOfMonth = String.valueOf(now.getDayOfMonth());
+        if (now.getDayOfMonth() < 10) {
+            dayOfMonth = "0" + now.getDayOfMonth();
+        }
+
+        return new URL("https://webnext.fr/epg_cache/programme-tv-rss_" + now.getYear() + "-" + monthValue + "-" + dayOfMonth + ".xml");
     }
 
 
