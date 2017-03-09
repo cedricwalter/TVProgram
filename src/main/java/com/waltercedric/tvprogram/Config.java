@@ -1,5 +1,6 @@
 package com.waltercedric.tvprogram;
 
+import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.Properties;
 public class Config {
 
     private final String builder;
+    private final String timeToTextConverter;
     private final String fromto_introduction;
     private final String fromto_each;
     private String sentenceNow_each;
@@ -44,11 +46,20 @@ public class Config {
         to = props.getProperty("TVGuideFromTo.to");
 
         builder = props.getProperty("builder");
+        timeToTextConverter = props.getProperty("TimeToTextConverter");
     }
 
     public TVProgramBuilder getBuilder() {
         try {
             return (TVProgramBuilder) Class.forName(builder).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("builder class is wrongly set", e);
+        }
+    }
+
+    public TimeToTextConverter getTimeToTextConverter() {
+        try {
+            return (TimeToTextConverter) Class.forName(timeToTextConverter).newInstance();
         } catch (Exception e) {
             throw new RuntimeException("builder class is wrongly set", e);
         }

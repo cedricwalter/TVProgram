@@ -1,6 +1,7 @@
 package com.waltercedric.tvprogram;
 
 import com.waltercedric.tvprogram.guide.TVGuide;
+import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import marytts.LocalMaryInterface;
@@ -20,6 +21,7 @@ class TVReader {
     private static final Config config = new Config();
     private final MaryInterface maryTTS;
     private static Object object = new Object();
+    private final TimeToTextConverter timeToTextConverter;
 
 
     public TVReader() {
@@ -29,6 +31,7 @@ class TVReader {
             throw new RuntimeException(e);
         }
         maryTTS.setVoice(config.getVoice());
+        timeToTextConverter = config.getTimeToTextConverter();
     }
 
     public void read(TVGuide guide) throws Exception {
@@ -48,8 +51,8 @@ class TVReader {
         parameters.put("title", tvProgram.getTitle());
         parameters.put("description", tvProgram.getDescription());
         parameters.put("category", tvProgram.getCategory());
-        parameters.put("start", tvProgram.getStartTime().toString());
-        parameters.put("end", tvProgram.getEndTime().toString());
+        parameters.put("start", timeToTextConverter.convertTimeToText(tvProgram.getStartTime().toString()));
+        parameters.put("end", timeToTextConverter.convertTimeToText(tvProgram.getEndTime().toString()));
         parameters.put("duration", tvProgram.getDuration().toString());
 
         StringWriter output = new StringWriter();
@@ -59,6 +62,7 @@ class TVReader {
 
         play(sentenceToPlay);
     }
+
 
     private void play(String sentenceToPlay) throws MaryConfigurationException, SynthesisException {
         synchronized (object) {

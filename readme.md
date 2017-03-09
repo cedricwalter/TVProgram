@@ -15,6 +15,7 @@ This java program can run on a raspberry pi 2/3.
 * TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided
 * RSS is cached for more efficiency
 * A TVGuide is build and then read by MaryTTS http://mary.dfki.de/
+* time like 13:15 will be converted in english to "Quarter past One" or "treize heure et quart"
 
 ## TVGuide
 * TVGuide now: give you the actual TVProgram on all channels running now +- x minutes
@@ -70,13 +71,14 @@ or
 
 `/etc/asound.conf`
 with
-```pcm.!default {
+```
+pcm.!default {
 type hw
-card Z205
+card 2
 }
 ctl.!default {
 type hw
-card Z205
+card 2
 }
 ```
 
