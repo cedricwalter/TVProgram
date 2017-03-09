@@ -18,6 +18,18 @@ import java.util.List;
 class TVReader {
 
     private static final Config config = new Config();
+    private final MaryInterface maryTTS;
+    private static Object object = new Object();
+
+
+    public TVReader() {
+        try {
+            maryTTS = new LocalMaryInterface();
+        } catch (MaryConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+        maryTTS.setVoice(config.getVoice());
+    }
 
     public void read(TVGuide guide) throws Exception {
         List<TVProgram> programs = guide.getProgram();
@@ -28,7 +40,7 @@ class TVReader {
         }
     }
 
-    private synchronized static void play(TVProgram tvProgram, String sentence) throws Exception {
+    private void play(TVProgram tvProgram, String sentence) throws Exception {
         Template template = new Template("templateName", new StringReader(sentence), new Configuration());
 
         HashMap<String, String> parameters = new HashMap<>();
@@ -48,12 +60,13 @@ class TVReader {
         play(sentenceToPlay);
     }
 
-    private static void play(String sentenceToPlay) throws MaryConfigurationException, SynthesisException {
-        MaryInterface maryTTS = new LocalMaryInterface();
-        maryTTS.setVoice(config.getVoice());
-        AudioPlayer player = new AudioPlayer();
-        player.setAudio(maryTTS.generateAudio(sentenceToPlay));
-        player.run();
+    private void play(String sentenceToPlay) throws MaryConfigurationException, SynthesisException {
+        synchronized (object) {
+            AudioPlayer player = new AudioPlayer();
+            player.setAudio(maryTTS.generateAudio(sentenceToPlay));
+            player.setPriority(10);
+            player.run();
+        }
     }
 
 }

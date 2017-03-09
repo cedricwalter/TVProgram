@@ -88,61 +88,66 @@
 
     <dependencies>
 
+        <!--ROME is a Java framework for RSS and Atom feeds. It's open source and licensed under the Apache 2.0 license.-->
+        <!--ROME includes a set of parsers and generators for the various flavors of syndication feeds, as well as
+        converters to convert from one format to another. The parsers can give you back Java objects that are either
+        specific for the format you want to work with, or a generic normalized SyndFeed class that lets you work on
+        with the data without bothering about the incoming or outgoing feed type.-->
         <dependency>
             <groupId>com.rometools</groupId>
             <artifactId>rome</artifactId>
             <version>${rome.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.rometools</groupId>
             <artifactId>rome-fetcher</artifactId>
             <version>${rome.version}</version>
         </dependency>
 
-
-    <!-- Local MaryTTS -->
+        <!--TODO http://pi4j.com/example/control.html-->
+        <!--Activate the desired language-->
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-cmu-slt-hsmm</artifactId>
             <version>${marytts.version}</version>
         </dependency>
-        <dependency>
-            <groupId>de.dfki.mary</groupId>
-            <artifactId>voice-dfki-pavoque-neutral-hsmm</artifactId>
-            <version>${marytts.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.dfki.mary</groupId>
-            <artifactId>voice-dfki-prudence-hsmm</artifactId>
-            <version>${marytts.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.dfki.mary</groupId>
-            <artifactId>voice-enst-dennys-hsmm</artifactId>
-            <version>${marytts.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>de.dfki.mary</groupId>-->
+        <!--<artifactId>voice-dfki-pavoque-neutral-hsmm</artifactId>-->
+        <!--<version>${marytts.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>de.dfki.mary</groupId>-->
+        <!--<artifactId>voice-dfki-prudence-hsmm</artifactId>-->
+        <!--<version>${marytts.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>de.dfki.mary</groupId>-->
+        <!--<artifactId>voice-enst-dennys-hsmm</artifactId>-->
+        <!--<version>${marytts.version}</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-upmc-pierre-hsmm</artifactId>
             <version>${marytts.version}</version>
         </dependency>
-        <dependency>
-            <groupId>de.dfki.mary</groupId>
-            <artifactId>voice-enst-camille-hsmm</artifactId>
-            <version>${marytts.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>de.dfki.mary</groupId>-->
+        <!--<artifactId>voice-enst-camille-hsmm</artifactId>-->
+        <!--<version>${marytts.version}</version>-->
+        <!--</dependency>-->
         <!--<dependency>-->
         <!--<groupId>de.dfki.mary</groupId>-->
         <!--<artifactId>voice-enst-camille</artifactId>-->
         <!--<version>${marytts.version}</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>de.dfki.mary</groupId>
-            <artifactId>voice-istc-lucia-hsmm</artifactId>
-            <version>${marytts.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>de.dfki.mary</groupId>-->
+        <!--<artifactId>voice-istc-lucia-hsmm</artifactId>-->
+        <!--<version>${marytts.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.freemarker</groupId>

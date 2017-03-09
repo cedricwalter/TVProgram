@@ -31,6 +31,7 @@ This java program can run on a raspberry pi 2/3.
 Raspbian is the Foundation’s official supported operating system. see https://www.raspberrypi.org/downloads/raspbian/
 
 ## Install JAVA
+Open a terminal and execute the following commands:
 
 ```sudo su -
 echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list
@@ -81,16 +82,46 @@ card Z205
 
 usb sound card ready to use, run alsamixer
 
-`alsamixer `
+`alsamixer`
 
 set the speaker volume , mic and make sure that speaker not muted, test configuration using
 
 `speaker-test`
 
+it will make  pink noise sound at your speaker or use 
+
+`sudo aplay /usr/share/sounds/alsa/Front_Center.wav`
+
+now
+sudo vi /usr/share/alsa/alsa.conf
+
+
+
 ## Get Release and Run
 
-```wget tvprogram-1.0-SNAPSHOT-shaded.jar
-java -jar tvprogram-1.0-SNAPSHOT-shaded.jar
-``` 
+`wget tvprogram-1.0-SNAPSHOT-shaded.jar`
+
+and
+
+`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar`
 
 ## Configure
+
+
+## Recurring
+Open a terminal and setup a cron job with the command `crontab -e` (for user specific job) or `sudo crontab -e` (for system wide job)
+Go to the end of the file and add the following line
+
+`*/30 * * * * /PATH/TO/tvprogram.sh`
+
+(This is set to 30 minutes interval). For other time intervals
+
+*  *  *  * *  command to execute (like above)
+┬ ┬ ┬ ┬ ┬
+│ │ │ │ │
+│ │ │ │ │
+│ │ │ │ └───── day of week (0 - 7) (0 to 6 are Sunday to Saturday, or use names; 7 is Sunday, the same as 0)
+│ │ │ └────────── month (1 - 12)
+│ │ └─────────────── day of month (1 - 31)
+│ └──────────────────── hour (0 - 23)
+└───────────────────────── min (0 - 59)
