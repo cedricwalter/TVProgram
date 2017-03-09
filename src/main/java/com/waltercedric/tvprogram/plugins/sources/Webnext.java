@@ -7,10 +7,12 @@ import com.rometools.rome.feed.synd.SyndCategory;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.waltercedric.tvprogram.TVProgram;
+import org.jsoup.Jsoup;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +31,7 @@ public class Webnext implements TVProgramBuilder {
             SyndFeed feed = new HttpURLFeedFetcher(feedInfoCache).retrieveFeed(feedUrl);
             List<SyndEntry> entries = feed.getEntries();
             for (SyndEntry entry : entries) {
-                SyndCategory o = entry.getCategories().get(0);
-
-                TVProgram tvProgram = new TVProgram(entry.getTitle(), o.getName(), entry.getDescription().getValue());
+                TVProgram tvProgram = getTvProgramFromEntry(entry);
 
                 programs.add(tvProgram);
             }
@@ -41,6 +41,21 @@ public class Webnext implements TVProgramBuilder {
         }
 
         return programs;
+    }
+
+    private TVProgram getTvProgramFromEntry(SyndEntry entry) {
+        SyndCategory o = entry.getCategories().get(0);
+
+        String category = Jsoup.parse(o.getName()).text();
+        String description = Jsoup.parse(entry.getDescription().getValue()).text();
+
+        String text = Jsoup.parse(entry.getTitle()).text();
+        String[] split = text.split("\\|");
+        String title = split[2].trim();
+        LocalTime startTime = LocalTime.parse(split[1].trim() + ":00");
+        String channel = split[0].trim();
+
+        return new TVProgram(channel, title, category, description, startTime);
     }
 
     private URL getTodayFeedURL() throws MalformedURLException {

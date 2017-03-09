@@ -1,7 +1,5 @@
 package com.waltercedric.tvprogram;
 
-import org.jsoup.Jsoup;
-
 import java.time.LocalTime;
 
 public class TVProgram {
@@ -12,16 +10,12 @@ public class TVProgram {
     private final String description;
     private final LocalTime startTime;
 
-    public TVProgram(String title, String category, String description) {
-        this.category = Jsoup.parse(category).text();
-        this.description = Jsoup.parse(description).text();
-
-        String text = Jsoup.parse(title).text();
-        //TODO create an extractor for specific webnext.fr
-        String[] split = text.split("\\|");
-        this.title = split[2].trim();
-        this.startTime = LocalTime.parse(split[1].trim() + ":00");
-        this.channel = split[0].trim();
+    public TVProgram(String channel, String title, String category, String description, LocalTime startTime) {
+        this.channel = channel;
+        this.title = title;
+        this.category = category;
+        this.description = description;
+        this.startTime = startTime;
     }
 
     public LocalTime getStartTime() {
