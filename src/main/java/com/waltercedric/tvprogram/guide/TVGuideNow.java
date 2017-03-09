@@ -22,6 +22,17 @@ public class TVGuideNow implements TVGuide {
         this.minutesToSubtract = minutesToSubtract;
     }
 
+    @Override
+    public String toString() {
+        return "TVGuideNow{" +
+                ", config=" + config +
+                ", now=" + now +
+                ", + minutes=" + minutesToAdd +
+                ", - minutes=" + minutesToSubtract +
+                "programs=" + programs +
+                '}';
+    }
+
     public List<TVProgram> getProgram() {
         List<TVProgram> programs = new ArrayList<>();
         for (TVProgram program : this.programs) {

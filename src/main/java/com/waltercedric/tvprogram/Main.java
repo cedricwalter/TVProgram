@@ -2,7 +2,6 @@ package com.waltercedric.tvprogram;
 
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.guide.TVGuideFromTo;
-import com.waltercedric.tvprogram.guide.TVGuideNow;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
 import java.time.LocalTime;
@@ -17,11 +16,13 @@ class Main {
 
         LocalTime now = LocalTime.now();
 
-        TVGuide guideNow = new TVGuideNow(builder.getTodayProgram(), now, 10, 5);
+//        TVGuide guideNow = new TVGuideNow(builder.getTodayProgram(), now, 10, 5);
+//        new TVReader().read(guideNow);
 
         TVGuide guideFromTo = new TVGuideFromTo(builder.getTodayProgram(), LocalTime.parse(config.getFrom()), LocalTime.parse(config.getTo()));
-
         new TVReader().read(guideFromTo);
+
+//        System.out.println(guideFromTo);
     }
 
 }

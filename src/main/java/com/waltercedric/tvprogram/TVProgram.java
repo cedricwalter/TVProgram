@@ -1,6 +1,7 @@
 package com.waltercedric.tvprogram;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 public class TVProgram {
 
@@ -9,7 +10,14 @@ public class TVProgram {
     private final String category;
     private final String description;
     private final LocalTime startTime;
-    private final LocalTime endTime;
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    private LocalTime endTime;
+
+
 
     public TVProgram(String channel, String title, String category, String description, LocalTime startTime, LocalTime endTime) {
         this.channel = channel;
@@ -42,5 +50,21 @@ public class TVProgram {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    public Long getDuration() {
+        return ChronoUnit.MINUTES.between(startTime, endTime);
+    }
+
+    @Override
+    public String toString() {
+        return "TVProgram{" +
+                "channel='" + channel + '\'' +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                "}\n";
     }
 }

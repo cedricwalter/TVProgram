@@ -51,6 +51,16 @@ public class Webnext implements TVProgramBuilder {
             for (SyndEntry entry : entries) {
                 TVProgram tvProgram = getTvProgramFromEntry(entry);
 
+                // use previous program on same channel to calculate end time
+                if (programs.size() > 0) {
+                    LocalTime startTime = tvProgram.getStartTime();
+
+                    TVProgram previous = programs.get(programs.size() - 1);
+                    if (previous.getChannel().equals(tvProgram.getChannel())) {
+                        previous.setEndTime(startTime);
+                    }
+                }
+
                 programs.add(tvProgram);
             }
 
@@ -60,6 +70,7 @@ public class Webnext implements TVProgramBuilder {
 
         return programs;
     }
+
 
     private TVProgram getTvProgramFromEntry(SyndEntry entry) {
         SyndCategory o = entry.getCategories().get(0);

@@ -11,4 +11,6 @@ public interface TVGuide {
     String getIntroduction();
 
     String getForEachProgram();
+
+    String toString();
 }

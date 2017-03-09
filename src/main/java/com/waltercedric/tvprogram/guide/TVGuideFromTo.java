@@ -51,4 +51,14 @@ public class TVGuideFromTo implements TVGuide {
     public String getForEachProgram() {
         return config.getFromto_each();
     }
+
+    @Override
+    public String toString() {
+        return "TVGuideFromTo{" +
+                "programs=" + programs +
+                ", from=" + from +
+                ", to=" + to +
+                ", config=" + config +
+                "} \n";
+    }
 }
