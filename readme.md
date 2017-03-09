@@ -26,6 +26,14 @@ This java program can run on a raspberry pi 2/3.
 * Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than french
 * Voices can be configured, for french "upmc-pierre-hsmm" or "enst-camille-hsmm" is recommended
 
+## Usages
+
+Get tv program started 5 minutes ago or in the next 10 minutes
+`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now 5 10`
+
+Get tv program starting between 20:00 and 22:00
+`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar program "20:00" "22:00"`
+
 # Raspberry PI
 
 ## Install Raspbian
@@ -97,15 +105,11 @@ it will make  pink noise sound at your speaker or use
 now
 sudo vi /usr/share/alsa/alsa.conf
 
-
-
 ## Get Release and Run
 
 `wget tvprogram-1.0-SNAPSHOT-shaded.jar`
 
-and
-
-`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar`
+see "Usages"
 
 ## Configure
 

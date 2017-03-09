@@ -21,8 +21,6 @@ public class Config {
     private List<String> free;
     private List<String> premium;
     private boolean usePremium;
-    private String from;
-    private String to;
 
     public Config() {
         InputStream resourceAsStream = getClass().getResourceAsStream("/config.properties");
@@ -42,8 +40,6 @@ public class Config {
 
         fromto_introduction = props.getProperty("TVGuideFromTo.introduction");
         fromto_each = props.getProperty("TVGuideFromTo.each");
-        from = props.getProperty("TVGuideFromTo.from");
-        to = props.getProperty("TVGuideFromTo.to");
 
         builder = props.getProperty("builder");
         timeToTextConverter = props.getProperty("TimeToTextConverter");
@@ -97,11 +93,4 @@ public class Config {
         return fromto_each;
     }
 
-    public String getFrom() {
-        return from;
-    }
-
-    public String getTo() {
-        return to;
-    }
 }
