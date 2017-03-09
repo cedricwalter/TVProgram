@@ -1,5 +1,7 @@
 package com.waltercedric.tvprogram;
 
+import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -8,6 +10,7 @@ import java.util.Properties;
 
 class Config {
 
+    private final String builder;
     private String sentenceNow_each;
     private String sentenceNow_introduction;
     private final String voice;
@@ -29,6 +32,15 @@ class Config {
         voice = props.getProperty("voice");
         sentenceNow_introduction = props.getProperty("sentenceNow.introduction");
         sentenceNow_each = props.getProperty("sentenceNow.each");
+        builder = props.getProperty("builder");
+    }
+
+    public TVProgramBuilder getBuilder() {
+        try {
+            return (TVProgramBuilder) Class.forName(builder).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("builder class is wrongly set", e);
+        }
     }
 
     public String getVoice() {

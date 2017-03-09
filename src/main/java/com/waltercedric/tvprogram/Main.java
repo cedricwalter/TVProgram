@@ -1,7 +1,6 @@
 package com.waltercedric.tvprogram;
 
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
-import com.waltercedric.tvprogram.plugins.sources.Webnext;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -9,7 +8,10 @@ import java.util.List;
 class Main {
 
     public static void main(String[] args) throws Exception {
-        TVProgramBuilder builder =  new Webnext();
+
+        Config config = new Config();
+
+        TVProgramBuilder builder = config.getBuilder();
 
         TVGuide guide = new TVGuide(builder.getTodayProgram());
 

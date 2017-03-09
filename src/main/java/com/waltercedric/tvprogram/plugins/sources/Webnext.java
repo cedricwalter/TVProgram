@@ -32,6 +32,7 @@ public class Webnext implements TVProgramBuilder {
         channels.put("W9", "W 9");
         channels.put("ter", "six ter");
         channels.put("TMC", "T M C");
+        channels.put("HD1", "HD un");
         channels.put("Gulli", "Gu li");
     }
 
