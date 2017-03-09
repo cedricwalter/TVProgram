@@ -16,6 +16,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * use https://webnext.fr/programme-tv-rss
+ */
 public class Webnext implements TVProgramBuilder {
 
     public List<TVProgram> getTodayProgram() {
@@ -73,6 +77,5 @@ public class Webnext implements TVProgramBuilder {
 
         return new URL("https://webnext.fr/epg_cache/programme-tv-rss_" + now.getYear() + "-" + monthValue + "-" + dayOfMonth + ".xml");
     }
-
 
 }

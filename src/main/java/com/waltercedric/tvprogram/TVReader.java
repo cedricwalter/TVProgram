@@ -4,6 +4,8 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import marytts.LocalMaryInterface;
 import marytts.MaryInterface;
+import marytts.exceptions.MaryConfigurationException;
+import marytts.exceptions.SynthesisException;
 import marytts.util.data.audio.AudioPlayer;
 
 import java.io.StringReader;
@@ -17,17 +19,14 @@ public class TVReader {
     private static final Config config = new Config();
 
     public void read(List<TVProgram> programs) throws Exception {
+        play(config.getSentenceNow_introduction());
         for (TVProgram tvProgram : programs) {
-            play(tvProgram);
+            play((TVProgram) tvProgram, config.getSentenceNow_each());
         }
     }
 
-    private synchronized static void play(TVProgram tvProgram) throws Exception {
-        MaryInterface marytts = new LocalMaryInterface();
-        marytts.setVoice(config.getVoice());
-        AudioPlayer player = new AudioPlayer();
-
-        Template template = new Template("templateName", new StringReader(config.getSentenceNow()), new Configuration());
+    private synchronized static void play(TVProgram tvProgram, String sentence) throws Exception {
+        Template template = new Template("templateName", new StringReader(sentence), new Configuration());
 
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("channel", tvProgram.getChannel());
@@ -38,7 +37,16 @@ public class TVReader {
         StringWriter output = new StringWriter();
         template.process(parameters, output);
 
-        player.setAudio(marytts.generateAudio(output.toString()));
+        String sentenceToPlay = output.toString();
+
+        play(sentenceToPlay);
+    }
+
+    private static void play(String sentenceToPlay) throws MaryConfigurationException, SynthesisException {
+        MaryInterface marytts = new LocalMaryInterface();
+        marytts.setVoice(config.getVoice());
+        AudioPlayer player = new AudioPlayer();
+        player.setAudio(marytts.generateAudio(sentenceToPlay));
         player.run();
     }
 
