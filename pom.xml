@@ -20,6 +20,39 @@
                         <target>1.8</target>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>2.10</version>
+                    <configuration>
+                        <basedir>${basedir}</basedir>
+                        <header>src/etc/header.txt</header>
+                        <quiet>false</quiet>
+                        <failIfMissing>true</failIfMissing>
+                        <strictCheck>true</strictCheck>
+                        <aggregate>true</aggregate>
+                        <includes>
+                            <include>**/com/cedricwalter/**/*.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                            <exclude>**/pom.xml</exclude>
+                            <exclude>_*.java</exclude>
+                        </excludes>
+                        <useDefaultExcludes>true</useDefaultExcludes>
+                        <properties>
+                            <year>2017</year>
+                        </properties>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -65,6 +98,17 @@
             <artifactId>voice-upmc-pierre-hsmm</artifactId>
             <version>5.2</version>
         </dependency>
+        <dependency>
+            <groupId>de.dfki.mary</groupId>
+            <artifactId>voice-enst-camille-hsmm</artifactId>
+            <version>5.2</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>de.dfki.mary</groupId>-->
+        <!--<artifactId>voice-enst-camille</artifactId>-->
+        <!--<version>5.2</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-istc-lucia-hsmm</artifactId>
