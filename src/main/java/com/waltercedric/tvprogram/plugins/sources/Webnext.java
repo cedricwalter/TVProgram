@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class Webnext implements TVProgramBuilder {
 
-    private static HashMap<String, String> channels = new HashMap<>();
+    private static final HashMap<String, String> channels = new HashMap<>();
 
     static {
         channels.put("TF1", "TF 1");

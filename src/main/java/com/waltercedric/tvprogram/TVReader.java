@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class TVReader {
+class TVReader {
 
     private static final Config config = new Config();
 
@@ -49,10 +49,10 @@ public class TVReader {
     }
 
     private static void play(String sentenceToPlay) throws MaryConfigurationException, SynthesisException {
-        MaryInterface marytts = new LocalMaryInterface();
-        marytts.setVoice(config.getVoice());
+        MaryInterface maryTTS = new LocalMaryInterface();
+        maryTTS.setVoice(config.getVoice());
         AudioPlayer player = new AudioPlayer();
-        player.setAudio(marytts.generateAudio(sentenceToPlay));
+        player.setAudio(maryTTS.generateAudio(sentenceToPlay));
         player.run();
     }
 

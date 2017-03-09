@@ -11,9 +11,9 @@ public class TVGuideNow implements TVGuide {
 
     private final List<TVProgram> programs;
     private final Config config = new Config();
-    private LocalTime now;
-    private int minutesToAdd;
-    private int minutesToSubtract;
+    private final LocalTime now;
+    private final int minutesToAdd;
+    private final int minutesToSubtract;
 
     public TVGuideNow(List<TVProgram> programs, LocalTime now, int minutesToAdd, int minutesToSubtract) {
         this.programs = programs;
