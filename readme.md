@@ -16,6 +16,10 @@ This java program can run on a raspberry pi 2/3.
 * RSS is cached for more efficiency
 * A TVGuide is build and then read by MaryTTS http://mary.dfki.de/
 
+## TVGuide
+* TVGuide now: give you the actual TVProgram on all channel running now +- x minutes
+* TVGuideFromTO: configurable guide, for example all TVProgram tonight on all channel
+
 ## Configuration
 * Free and Premium channel can be filtered out
 * Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than french
