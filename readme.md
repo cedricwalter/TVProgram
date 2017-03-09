@@ -42,7 +42,8 @@ Raspbian is the Foundation’s official supported operating system. see https://
 ## Install JAVA
 Open a terminal and execute the following commands:
 
-```sudo su -
+```
+sudo su -
 echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list
 echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
@@ -55,7 +56,8 @@ exit
 
 ## get sound out
 
-```pi@raspberrypi:~ $ lsusb
+```
+pi@raspberrypi:~ $ lsusb
 Bus 001 Device 005: ID 2001:330d D-Link Corp.
 Bus 001 Device 006: ID 045e:00dd Microsoft Corp. Comfort Curve Keyboard 2000 V1.0
 Bus 001 Device 004: ID 046d:0a19 Logitech, Inc.
