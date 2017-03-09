@@ -1,5 +1,6 @@
 package com.waltercedric.tvprogram;
 
+import com.waltercedric.tvprogram.guide.TVGuideNow;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
 import java.time.LocalTime;
@@ -13,7 +14,7 @@ class Main {
 
         TVProgramBuilder builder = config.getBuilder();
 
-        TVGuide guide = new TVGuide(builder.getTodayProgram());
+        TVGuideNow guide = new TVGuideNow(builder.getTodayProgram());
 
         LocalTime now = LocalTime.now();
 

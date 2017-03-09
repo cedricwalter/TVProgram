@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-class Config {
+public class Config {
 
     private final String builder;
     private String sentenceNow_each;

@@ -1,15 +1,18 @@
-package com.waltercedric.tvprogram;
+package com.waltercedric.tvprogram.guide;
+
+import com.waltercedric.tvprogram.Config;
+import com.waltercedric.tvprogram.TVProgram;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class TVGuide {
+public class TVGuideNow implements TVGuide {
 
     private final List<TVProgram> programs;
     private final Config config = new Config();
 
-    public TVGuide(List<TVProgram> programs) {
+    public TVGuideNow(List<TVProgram> programs) {
         this.programs = programs;
     }
 
