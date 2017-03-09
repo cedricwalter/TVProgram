@@ -8,53 +8,79 @@
     <artifactId>tvprogram</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <marytts.version>5.2</marytts.version>
+        <rome.version>1.7.1</rome.version>
+    </properties>
+
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.0</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <version>2.10</version>
-                    <configuration>
-                        <basedir>${basedir}</basedir>
-                        <header>src/etc/header.txt</header>
-                        <quiet>false</quiet>
-                        <failIfMissing>true</failIfMissing>
-                        <strictCheck>true</strictCheck>
-                        <aggregate>true</aggregate>
-                        <includes>
-                            <include>**/com/cedricwalter/**/*.java</include>
-                        </includes>
-                        <excludes>
-                            <exclude>target/**</exclude>
-                            <exclude>**/pom.xml</exclude>
-                            <exclude>_*.java</exclude>
-                        </excludes>
-                        <useDefaultExcludes>true</useDefaultExcludes>
-                        <properties>
-                            <year>2017</year>
-                        </properties>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <basedir>${basedir}</basedir>
+                    <header>src/etc/header.txt</header>
+                    <quiet>false</quiet>
+                    <failIfMissing>true</failIfMissing>
+                    <strictCheck>true</strictCheck>
+                    <aggregate>true</aggregate>
+                    <includes>
+                        <include>**/com/cedricwalter/**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>target/**</exclude>
+                        <exclude>**/pom.xml</exclude>
+                        <exclude>_*.java</exclude>
+                    </excludes>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <properties>
+                        <year>2017</year>
+                    </properties>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.waltercedric.tvprogram.Main.main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>
@@ -62,13 +88,13 @@
         <dependency>
             <groupId>com.rometools</groupId>
             <artifactId>rome</artifactId>
-            <version>1.7.1</version>
+            <version>${rome.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.rometools</groupId>
             <artifactId>rome-fetcher</artifactId>
-            <version>1.7.1</version>
+            <version>${rome.version}</version>
         </dependency>
 
 
@@ -76,43 +102,43 @@
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-cmu-slt-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-dfki-pavoque-neutral-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-dfki-prudence-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-enst-dennys-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-upmc-pierre-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-enst-camille-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>de.dfki.mary</groupId>-->
         <!--<artifactId>voice-enst-camille</artifactId>-->
-        <!--<version>5.2</version>-->
+        <!--<version>${marytts.version}</version>-->
         <!--</dependency>-->
 
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>voice-istc-lucia-hsmm</artifactId>
-            <version>5.2</version>
+            <version>${marytts.version}</version>
         </dependency>
 
         <dependency>
@@ -133,7 +159,7 @@
         <!--<dependency>-->
         <!--<groupId>de.dfki.mary</groupId>-->
         <!--<artifactId>marytts-client</artifactId>-->
-        <!--<version>5.2</version>-->
+        <!--<version>${marytts.version}</version>-->
         <!--</dependency>-->
     </dependencies>
 
