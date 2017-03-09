@@ -7,26 +7,26 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TVGuideNow implements TVGuide {
+
+public class TVGuideFromTo implements TVGuide {
 
     private final List<TVProgram> programs;
+    private final LocalTime from;
+    private final LocalTime to;
     private final Config config = new Config();
-    private LocalTime now;
-    private int minutesToAdd;
-    private int minutesToSubtract;
 
-    public TVGuideNow(List<TVProgram> programs, LocalTime now, int minutesToAdd, int minutesToSubtract) {
+    public TVGuideFromTo(List<TVProgram> programs, LocalTime from, LocalTime to) {
         this.programs = programs;
-        this.now = now;
-        this.minutesToAdd = minutesToAdd;
-        this.minutesToSubtract = minutesToSubtract;
+        this.from = from;
+        this.to = to;
     }
 
+    @Override
     public List<TVProgram> getProgram() {
         List<TVProgram> programs = new ArrayList<>();
         for (TVProgram program : this.programs) {
-            if (program.getStartTime().isBefore(now.plusMinutes(minutesToAdd)) &&
-                    program.getStartTime().isAfter(now.minusMinutes(minutesToSubtract))) {
+            if (program.getStartTime().isBefore(to) &&
+                    program.getStartTime().isAfter(from)) {
 
                 if (config.getFree().contains(program.getChannel())) {
                     programs.add(program);
@@ -44,12 +44,11 @@ public class TVGuideNow implements TVGuide {
 
     @Override
     public String getIntroduction() {
-        return config.getSentenceNow_introduction();
+        return config.getFromto_introduction();
     }
 
     @Override
     public String getForEachProgram() {
-        return config.getSentenceNow_each();
+        return config.getFromto_each();
     }
-
 }

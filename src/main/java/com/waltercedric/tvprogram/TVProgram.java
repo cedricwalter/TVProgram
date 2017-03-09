@@ -9,13 +9,15 @@ public class TVProgram {
     private final String category;
     private final String description;
     private final LocalTime startTime;
+    private final LocalTime endTime;
 
-    public TVProgram(String channel, String title, String category, String description, LocalTime startTime) {
+    public TVProgram(String channel, String title, String category, String description, LocalTime startTime, LocalTime endTime) {
         this.channel = channel;
         this.title = title;
         this.category = category;
         this.description = description;
         this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public LocalTime getStartTime() {
@@ -36,5 +38,9 @@ public class TVProgram {
 
     public String getCategory() {
         return category;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
     }
 }

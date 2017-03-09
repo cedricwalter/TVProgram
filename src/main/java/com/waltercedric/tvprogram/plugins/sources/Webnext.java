@@ -73,7 +73,7 @@ public class Webnext implements TVProgramBuilder {
         LocalTime startTime = LocalTime.parse(split[1].trim() + ":00");
         String channel = translateChannelForMoreClarity(split[0].trim());
 
-        return new TVProgram(channel, title, category, description, startTime);
+        return new TVProgram(channel, title, category, description, startTime, startTime);
     }
 
     private String translateChannelForMoreClarity(String channel) {

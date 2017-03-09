@@ -11,12 +11,16 @@ import java.util.Properties;
 public class Config {
 
     private final String builder;
+    private final String fromto_introduction;
+    private final String fromto_each;
     private String sentenceNow_each;
     private String sentenceNow_introduction;
     private final String voice;
     private List<String> free;
     private List<String> premium;
     private boolean usePremium;
+    private String from;
+    private String to;
 
     public Config() {
         InputStream resourceAsStream = getClass().getResourceAsStream("/config.properties");
@@ -30,8 +34,15 @@ public class Config {
         free = Arrays.asList(props.getProperty("free").split(","));
         usePremium = Boolean.valueOf(props.getProperty("use.premium"));
         voice = props.getProperty("voice");
-        sentenceNow_introduction = props.getProperty("sentenceNow.introduction");
-        sentenceNow_each = props.getProperty("sentenceNow.each");
+
+        sentenceNow_introduction = props.getProperty("TVGuideNow.introduction");
+        sentenceNow_each = props.getProperty("TVGuideNow.each");
+
+        fromto_introduction = props.getProperty("TVGuideFromTo.introduction");
+        fromto_each = props.getProperty("TVGuideFromTo.each");
+        from = props.getProperty("TVGuideFromTo.from");
+        to = props.getProperty("TVGuideFromTo.to");
+
         builder = props.getProperty("builder");
     }
 
@@ -65,5 +76,21 @@ public class Config {
 
     public String getSentenceNow_introduction() {
         return sentenceNow_introduction;
+    }
+
+    public String getFromto_introduction() {
+        return fromto_introduction;
+    }
+
+    public String getFromto_each() {
+        return fromto_each;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public String getTo() {
+        return to;
     }
 }

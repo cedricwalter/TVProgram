@@ -1,5 +1,6 @@
 package com.waltercedric.tvprogram;
 
+import com.waltercedric.tvprogram.guide.TVGuide;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import marytts.LocalMaryInterface;
@@ -18,10 +19,12 @@ public class TVReader {
 
     private static final Config config = new Config();
 
-    public void read(List<TVProgram> programs) throws Exception {
-        play(config.getSentenceNow_introduction());
+    public void read(TVGuide guide) throws Exception {
+        List<TVProgram> programs = guide.getProgram();
+
+        play(guide.getIntroduction());
         for (TVProgram tvProgram : programs) {
-            play((TVProgram) tvProgram, config.getSentenceNow_each());
+            play(tvProgram, guide.getForEachProgram());
         }
     }
 
@@ -33,6 +36,8 @@ public class TVReader {
         parameters.put("title", tvProgram.getTitle());
         parameters.put("description", tvProgram.getDescription());
         parameters.put("category", tvProgram.getCategory());
+        parameters.put("start", tvProgram.getStartTime().toString());
+        parameters.put("end", tvProgram.getEndTime().toString());
 
         StringWriter output = new StringWriter();
         template.process(parameters, output);
