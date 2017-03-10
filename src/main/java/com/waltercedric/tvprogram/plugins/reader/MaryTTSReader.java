@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class TVReader {
+public class MaryTTSReader {
 
     private static final Config config = new Config();
     private final MaryInterface maryTTS;
@@ -26,7 +26,7 @@ public class TVReader {
     private final TimeToTextConverter timeToTextConverter;
 
 
-    public TVReader() {
+    public MaryTTSReader() {
         try {
             maryTTS = new LocalMaryInterface();
         } catch (MaryConfigurationException e) {
