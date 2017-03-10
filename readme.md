@@ -14,7 +14,7 @@ This java program can run on a raspberry pi 2/3.
 ## Currently
 * TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided
 * RSS is cached for more efficiency
-* A TVGuide is build and then read by MaryTTS http://mary.dfki.de/
+* A TVGuide is build and then read by either MaryTTS http://mary.dfki.de/ or Amazon AWS Polly
 * time like 13:15 will be converted in english to "Quarter past One" or "treize heure et quart"
 
 ## TVGuide
@@ -22,11 +22,36 @@ This java program can run on a raspberry pi 2/3.
 * TVGuideFromTO: configurable guide, for example all TVProgram tonight on all channels
 
 ## Configuration
-* Free and Premium channel can be filtered out
+* Free and Premium channel can be filtered out in config.properties
 * Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than french
+
+# TTS sound engine
+
+### Mary TTS
+Quite demanding on resources, even on a PI3 do not run so great.
+
 * Voices can be configured, for french "upmc-pierre-hsmm" or "enst-camille-hsmm" is recommended
 
-## Usages
+#### config.properties
+Set at least the following
+```
+TVReader=com.waltercedric.tvprogram.plugins.reader.MaryTTSReader
+voice=upmc-pierre-hsmm
+```
+
+### Amazon AWS Polly
+Sound great but send data to cloud, 42 languages supported, free tier: 1 million character read per month
+
+#### config.properties
+Set at least the following
+```
+TVReader=com.waltercedric.tvprogram.plugins.reader.PollyTTSReader
+TVReader.PollyTTSReader.IAM-access=xxxxx
+TVReader.PollyTTSReader.IAM-secret=xxxxx
+TVReader.PollyTTSReader.region=us-east-1
+TVReader.PollyTTSReader.voiceid=Mathieu
+```
+# Usages
 
 Get tv program started 5 minutes ago or in the next 10 minutes
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now 5 10`
@@ -36,10 +61,11 @@ Get tv program starting between 20:00 and 22:00
 
 # Raspberry PI
 
-## Install Raspbian
+## Required
+### Install Raspbian
 Raspbian is the Foundation’s official supported operating system. see https://www.raspberrypi.org/downloads/raspbian/
 
-## Install JAVA
+### Install JAVA
 Open a terminal and execute the following commands:
 
 ```
@@ -54,7 +80,7 @@ apt-get install oracle-java8-set-default
 exit
 ```
 
-## get sound out
+### get sound out
 
 ```
 pi@raspberrypi:~ $ lsusb
@@ -72,7 +98,8 @@ For my Logitech Z205 USB speaker
 
 `/home/pi/.asoundrc`
 with
-```defaults.ctl.card 1 
+```
+defaults.ctl.card 1 
 defaults.pcm.card 1 
 defaults.timer.card 1
 ```
@@ -106,15 +133,6 @@ it will make  pink noise sound at your speaker or use
 
 now
 sudo vi /usr/share/alsa/alsa.conf
-
-## Get Release and Run
-
-`wget tvprogram-1.0-SNAPSHOT-shaded.jar`
-
-see "Usages"
-
-## Configure
-
 
 ## Recurring
 Open a terminal and setup a cron job with the command `crontab -e` (for user specific job) or `sudo crontab -e` (for system wide job)
