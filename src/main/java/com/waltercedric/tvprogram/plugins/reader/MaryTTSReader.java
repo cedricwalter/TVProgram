@@ -8,7 +8,7 @@ import marytts.exceptions.SynthesisException;
 import marytts.util.data.audio.AudioPlayer;
 
 
-public class MaryTTSReader implements TVReader {
+public class MaryTTSReader implements TTSReader {
 
     private static final Config config = new Config();
     private final MaryInterface maryTTS;

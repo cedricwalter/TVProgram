@@ -1,7 +1,7 @@
 package com.waltercedric.tvprogram.plugins.reader;
 
 
-public interface TVReader {
+public interface TTSReader {
 
     void play(String sentenceToPlay);
 }

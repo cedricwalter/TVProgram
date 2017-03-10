@@ -1,6 +1,7 @@
 package com.waltercedric.tvprogram;
 
 import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
+import com.waltercedric.tvprogram.plugins.reader.TTSReader;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
 import java.io.FileReader;
@@ -13,7 +14,7 @@ public class Config {
 
     private final String tvProgramBuilder;
     private final String timeToTextConverter;
-    private final String tvReader;
+    private final String ttsReader;
 
     private final String fromto_introduction;
     private final String fromto_each;
@@ -53,7 +54,7 @@ public class Config {
 
             tvProgramBuilder = props.getProperty("TVProgramBuilder");
             timeToTextConverter = props.getProperty("TimeToTextConverter");
-            tvReader = props.getProperty("TVReader");
+            ttsReader = props.getProperty("TTSReader");
 
             iam_access = props.getProperty("TVReader.PollyTTSReader.IAM-access");
             iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
@@ -80,11 +81,11 @@ public class Config {
         }
     }
 
-    public com.waltercedric.tvprogram.plugins.reader.TVReader getTVReader() {
+    public TTSReader getTTSReader() {
         try {
-            return (com.waltercedric.tvprogram.plugins.reader.TVReader) Class.forName(tvReader).newInstance();
+            return (TTSReader) Class.forName(ttsReader).newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("TVReader class is wrongly set", e);
+            throw new RuntimeException("TTSReader class is wrongly set", e);
         }
     }
 

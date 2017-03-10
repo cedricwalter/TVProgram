@@ -2,6 +2,7 @@ package com.waltercedric.tvprogram;
 
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
+import com.waltercedric.tvprogram.plugins.reader.TTSReader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -14,18 +15,17 @@ public class TVReader {
 
     private static final Config config = new Config();
     private final TimeToTextConverter timeToTextConverter;
-    private final com.waltercedric.tvprogram.plugins.reader.TVReader tvReader;
-
+    private final TTSReader TTSReader;
 
     public TVReader() {
         this.timeToTextConverter = config.getTimeToTextConverter();
-        this.tvReader = config.getTVReader();
+        this.TTSReader = config.getTTSReader();
     }
 
     public void read(TVGuide guide) throws Exception {
         List<TVProgram> programs = guide.getProgram();
 
-        tvReader.play(guide.getIntroduction());
+        TTSReader.play(guide.getIntroduction());
         for (TVProgram tvProgram : programs) {
             play(tvProgram, guide.getForEachProgram());
         }
@@ -49,7 +49,7 @@ public class TVReader {
 
         String sentenceToPlay = output.toString();
 
-        tvReader.play(sentenceToPlay);
+        TTSReader.play(sentenceToPlay);
     }
 
 

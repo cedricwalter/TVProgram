@@ -12,7 +12,7 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 
-public class PollyTTSReader implements TVReader {
+public class PollyTTSReader implements TTSReader {
 
     private static final Config config = new Config();
     private static Object object = new Object();
