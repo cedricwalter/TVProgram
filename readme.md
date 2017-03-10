@@ -33,7 +33,6 @@ This java program can run on a raspberry pi 2/3.
 * Free and Premium channel can be filtered out in `config.properties`
 * Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than french
 
-
 # TTS sound engine
 
 ### Mary TTS
@@ -51,11 +50,18 @@ voice=upmc-pierre-hsmm
 ### Amazon AWS Polly
 Sound great but send data to cloud, 42 languages supported, free tier: 1 million character read per month
 
-English, American	French	Portuguese, Brazilian
-English, Australian	French, Canadian	Romanian
-English, British	German	Russian
-English, Indian	Icelandic	Spanish, Castilian
-English, Welsh	Italian	Spanish, American
+Pricing and Availability
+You can use Polly to process 5 million characters per month at no charge. After that, you pay $0.000004 per character, 
+or about $0.004 per minute of generated audio. That works out to about $0.018 for this blog post, 
+or around $2.40 for the full text of Adventures of Huckleberry Finn.
+
+Polly is available now in the US East (Northern Virginia), US West (Oregon), US East (Ohio), and EU (Ireland) Regions
+
+English American, French, Portuguese, Brazilian
+English Australian	French, Canadian	,Romanian
+English British	German	Russian
+English Indian	Icelandic	Spanish, Castilian
+English Welsh	Italian	Spanish, American
 Welsh	Japanese	Swedish
 Danish	Polish	Turkish
 Dutch	Portuguese
