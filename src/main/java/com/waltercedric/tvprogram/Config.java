@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class Config {
 
-    private final String builder;
+    private final String tvProgramBuilder;
     private final String timeToTextConverter;
     private final String tvReader;
 
@@ -43,14 +43,14 @@ public class Config {
         fromto_introduction = props.getProperty("TVGuideFromTo.introduction");
         fromto_each = props.getProperty("TVGuideFromTo.each");
 
-        builder = props.getProperty("builder");
+        tvProgramBuilder = props.getProperty("TVProgramBuilder");
         timeToTextConverter = props.getProperty("TimeToTextConverter");
         tvReader = props.getProperty("TVReader");
     }
 
-    public TVProgramBuilder getBuilder() {
+    public TVProgramBuilder getTvProgramBuilder() {
         try {
-            return (TVProgramBuilder) Class.forName(builder).newInstance();
+            return (TVProgramBuilder) Class.forName(tvProgramBuilder).newInstance();
         } catch (Exception e) {
             throw new RuntimeException("TVProgramBuilder class is wrongly set", e);
         }

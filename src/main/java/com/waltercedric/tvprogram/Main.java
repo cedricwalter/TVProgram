@@ -13,7 +13,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         Config config = new Config();
 
-        TVProgramBuilder builder = config.getBuilder();
+        TVProgramBuilder builder = config.getTvProgramBuilder();
         if ("now".equals(args[0])) {
             LocalTime now = LocalTime.now();
             TVGuide guideNow = new TVGuideNow(builder.getTodayProgram(), now, Integer.valueOf(args[1]), Integer.valueOf(args[2]));
