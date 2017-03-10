@@ -26,14 +26,14 @@ public class Webnext implements TVProgramBuilder {
     private static final HashMap<String, String> channels = new HashMap<>();
 
     static {
-        channels.put("TF1", "TF 1");
-        channels.put("M6", "M 6");
-        channels.put("C8", "C 8");
-        channels.put("W9", "W 9");
-        channels.put("ter", "six ter");
-        channels.put("TMC", "T M C");
-        channels.put("HD1", "HD un");
-        channels.put("Gulli", "Gu li");
+        channels.put("TF1", "TF1");
+        channels.put("M6", "M6");
+        channels.put("C8", "C8");
+        channels.put("W9", "W9");
+        channels.put("ter", "6ter");
+        channels.put("TMC", "TMC");
+        channels.put("HD1", "HD1");
+        channels.put("Gulli", "Gulli");
     }
 
     public List<TVProgram> getTodayProgram() {

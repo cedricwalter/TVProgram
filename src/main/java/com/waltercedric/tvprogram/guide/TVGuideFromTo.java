@@ -25,8 +25,9 @@ public class TVGuideFromTo implements TVGuide {
     public List<TVProgram> getProgram() {
         List<TVProgram> programs = new ArrayList<>();
         for (TVProgram program : this.programs) {
-            if (program.getStartTime().isBefore(to) &&
-                    program.getStartTime().isAfter(from)) {
+            boolean startingAtTime = program.getStartTime().isAfter(from);
+            boolean startingBeforeEnd = program.getStartTime().isBefore(to);
+            if (startingBeforeEnd && startingAtTime) {
 
                 if (config.getFree().contains(program.getChannel())) {
                     programs.add(program);

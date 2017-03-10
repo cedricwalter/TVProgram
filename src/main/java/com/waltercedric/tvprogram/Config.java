@@ -3,7 +3,7 @@ package com.waltercedric.tvprogram;
 import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
-import java.io.IOException;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -34,29 +34,34 @@ public class Config {
         InputStream resourceAsStream = getClass().getResourceAsStream("/config.properties");
         Properties props = new Properties();
         try {
-            props.load(resourceAsStream);
-        } catch (IOException e) {
-            throw new RuntimeException("Can not read config file");
+            if (resourceAsStream != null) {
+                props.load(resourceAsStream);
+            } else {
+                props.load(new FileReader("config.properties"));
+            }
+
+            premium = Arrays.asList(props.getProperty("premium").split(","));
+            free = Arrays.asList(props.getProperty("free").split(","));
+            usePremium = Boolean.valueOf(props.getProperty("use.premium"));
+            voice = props.getProperty("voice");
+
+            sentenceNow_introduction = props.getProperty("TVGuideNow.introduction");
+            sentenceNow_each = props.getProperty("TVGuideNow.each");
+
+            fromto_introduction = props.getProperty("TVGuideFromTo.introduction");
+            fromto_each = props.getProperty("TVGuideFromTo.each");
+
+            tvProgramBuilder = props.getProperty("TVProgramBuilder");
+            timeToTextConverter = props.getProperty("TimeToTextConverter");
+            tvReader = props.getProperty("TVReader");
+
+            iam_access = props.getProperty("TVReader.PollyTTSReader.IAM-access");
+            iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
+            aws_region = props.getProperty("TVReader.PollyTTSReader.region");
+            voiceid = props.getProperty("TVReader.PollyTTSReader.voiceid");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        premium = Arrays.asList(props.getProperty("premium").split(","));
-        free = Arrays.asList(props.getProperty("free").split(","));
-        usePremium = Boolean.valueOf(props.getProperty("use.premium"));
-        voice = props.getProperty("voice");
-
-        sentenceNow_introduction = props.getProperty("TVGuideNow.introduction");
-        sentenceNow_each = props.getProperty("TVGuideNow.each");
-
-        fromto_introduction = props.getProperty("TVGuideFromTo.introduction");
-        fromto_each = props.getProperty("TVGuideFromTo.each");
-
-        tvProgramBuilder = props.getProperty("TVProgramBuilder");
-        timeToTextConverter = props.getProperty("TimeToTextConverter");
-        tvReader = props.getProperty("TVReader");
-
-        iam_access = props.getProperty("TVReader.PollyTTSReader.IAM-access");
-        iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
-        aws_region = props.getProperty("TVReader.PollyTTSReader.region");
-        voiceid = props.getProperty("TVReader.PollyTTSReader.voiceid");
     }
 
     public TVProgramBuilder getTvProgramBuilder() {

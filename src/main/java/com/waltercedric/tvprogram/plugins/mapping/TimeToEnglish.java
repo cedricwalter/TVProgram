@@ -1,7 +1,7 @@
 package com.waltercedric.tvprogram.plugins.mapping;
 
 
-public class TimeToEnglish {
+public class TimeToEnglish implements TimeToTextConverter {
 
     public String convertTimeToText(String value) {
         String[] split = value.split("\\:");

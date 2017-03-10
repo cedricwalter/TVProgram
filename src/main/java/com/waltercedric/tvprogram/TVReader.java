@@ -42,6 +42,7 @@ public class TVReader {
         parameters.put("start", timeToTextConverter.convertTimeToText(tvProgram.getStartTime().toString()));
         parameters.put("end", timeToTextConverter.convertTimeToText(tvProgram.getEndTime().toString()));
         parameters.put("duration", tvProgram.getDuration().toString());
+        parameters.put("left", String.valueOf(tvProgram.getRestTime()));
 
         StringWriter output = new StringWriter();
         template.process(parameters, output);

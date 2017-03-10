@@ -10,14 +10,8 @@ public class TVProgram {
     private final String category;
     private final String description;
     private final LocalTime startTime;
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
+    private long restTime;
     private LocalTime endTime;
-
-
 
     public TVProgram(String channel, String title, String category, String description, LocalTime startTime, LocalTime endTime) {
         this.channel = channel;
@@ -56,6 +50,18 @@ public class TVProgram {
         return ChronoUnit.MINUTES.between(startTime, endTime);
     }
 
+    public long getRestTime() {
+        return restTime;
+    }
+
+    public void setRestTime(long restTime) {
+        this.restTime = restTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public String toString() {
         return "TVProgram{" +
@@ -65,6 +71,7 @@ public class TVProgram {
                 ", description='" + description + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", restTime=" + restTime +
                 "}\n";
     }
 }

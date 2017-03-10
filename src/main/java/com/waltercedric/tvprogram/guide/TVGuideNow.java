@@ -4,6 +4,7 @@ import com.waltercedric.tvprogram.Config;
 import com.waltercedric.tvprogram.TVProgram;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +13,10 @@ public class TVGuideNow implements TVGuide {
     private final List<TVProgram> programs;
     private final Config config = new Config();
     private final LocalTime now;
-    private final int minutesToAdd;
-    private final int minutesToSubtract;
 
-    public TVGuideNow(List<TVProgram> programs, LocalTime now, int minutesToAdd, int minutesToSubtract) {
+    public TVGuideNow(List<TVProgram> programs, LocalTime now) {
         this.programs = programs;
         this.now = now;
-        this.minutesToAdd = minutesToAdd;
-        this.minutesToSubtract = minutesToSubtract;
     }
 
     @Override
@@ -27,8 +24,6 @@ public class TVGuideNow implements TVGuide {
         return "TVGuideNow{" +
                 ", config=" + config +
                 ", now=" + now +
-                ", + minutes=" + minutesToAdd +
-                ", - minutes=" + minutesToSubtract +
                 "programs=" + programs +
                 '}';
     }
@@ -36,8 +31,14 @@ public class TVGuideNow implements TVGuide {
     public List<TVProgram> getProgram() {
         List<TVProgram> programs = new ArrayList<>();
         for (TVProgram program : this.programs) {
-            if (program.getStartTime().isBefore(now.plusMinutes(minutesToAdd)) &&
-                    program.getStartTime().isAfter(now.minusMinutes(minutesToSubtract))) {
+
+            LocalTime startTime = program.getStartTime();
+            LocalTime endTime = program.getEndTime();
+
+            boolean add = startTime.isBefore(now) && now.isBefore(endTime);
+            if (add) {
+                long minutes = ChronoUnit.MINUTES.between(now, endTime);
+                program.setRestTime(minutes);
 
                 if (config.getFree().contains(program.getChannel())) {
                     programs.add(program);

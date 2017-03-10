@@ -15,7 +15,7 @@ class Main {
         TVProgramBuilder builder = config.getTvProgramBuilder();
         if ("now".equals(args[0])) {
             LocalTime now = LocalTime.now();
-            TVGuide guideNow = new TVGuideNow(builder.getTodayProgram(), now, Integer.valueOf(args[1]), Integer.valueOf(args[2]));
+            TVGuide guideNow = new TVGuideNow(builder.getTodayProgram(), now);
             new TVReader().read(guideNow);
         } else if ("program".equals(args[0])) {
             TVGuide guideFromTo = new TVGuideFromTo(builder.getTodayProgram(), LocalTime.parse(args[1]), LocalTime.parse(args[2]));

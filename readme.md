@@ -42,6 +42,16 @@ voice=upmc-pierre-hsmm
 ### Amazon AWS Polly
 Sound great but send data to cloud, 42 languages supported, free tier: 1 million character read per month
 
+English, American	French	Portuguese, Brazilian
+English, Australian	French, Canadian	Romanian
+English, British	German	Russian
+English, Indian	Icelandic	Spanish, Castilian
+English, Welsh	Italian	Spanish, American
+Welsh	Japanese	Swedish
+Danish	Polish	Turkish
+Dutch	Portuguese
+Norwegian
+
 #### config.properties
 Set at least the following
 ```
@@ -51,9 +61,12 @@ TVReader.PollyTTSReader.IAM-secret=xxxxx
 TVReader.PollyTTSReader.region=us-east-1
 TVReader.PollyTTSReader.voiceid=Mathieu
 ```
+
+see also https://aws.amazon.com/polly/faqs/
+
 # Usages
 
-Get tv program started 5 minutes ago or in the next 10 minutes
+Get tv program running now
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now 5 10`
 
 Get tv program starting between 20:00 and 22:00
