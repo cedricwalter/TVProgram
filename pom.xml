@@ -71,6 +71,7 @@
                         <configuration>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
+                                <!--required by maryTTS-->
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
@@ -87,7 +88,6 @@
     </build>
 
     <dependencies>
-
         <!--ROME is a Java framework for RSS and Atom feeds. It's open source and licensed under the Apache 2.0 license.-->
         <!--ROME includes a set of parsers and generators for the various flavors of syndication feeds, as well as
         converters to convert from one format to another. The parsers can give you back Java objects that are either
@@ -144,6 +144,7 @@
         <!--<version>${marytts.version}</version>-->
         <!--</dependency>-->
 
+        <!-- templates for sentences -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -157,20 +158,24 @@
             <version>1.8.3</version>
         </dependency>
 
+        <!-- junit 5 -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
             <version>1.0.0-M3</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.0.0-M3</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.0.0-M3</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- amazon polly tts-->

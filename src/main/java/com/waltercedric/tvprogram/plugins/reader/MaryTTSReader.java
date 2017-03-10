@@ -21,7 +21,6 @@ public class MaryTTSReader implements TTSReader {
             throw new RuntimeException(e);
         }
         maryTTS.setVoice(config.getVoice());
-
     }
 
     public void play(String sentenceToPlay) {

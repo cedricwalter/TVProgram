@@ -100,6 +100,7 @@ public class Webnext implements TVProgramBuilder {
         LocalTime startTime = LocalTime.parse(split[1].trim() + ":00");
         String channel = translateChannelForMoreClarity(split[0].trim());
 
+        //endTime do not exist in feed, will be later updated when we have the whole list, so use startTime for now
         return new TVProgram(channel, title, category, description, startTime, startTime);
     }
 
@@ -115,6 +116,7 @@ public class Webnext implements TVProgramBuilder {
 
         String spec = "https://webnext.fr/epg_cache/programme-tv-rss_" + date + ".xml";
         System.out.println("Fetching RSS from " + spec);
+
         return new URL(spec);
     }
 

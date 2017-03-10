@@ -6,7 +6,7 @@
 
 [![TVprogram](https://img.youtube.com/vi/bEzWkPFL3ns/0.jpg)](https://youtu.be/bEzWkPFL3ns)
 
-This program is able to get the french TV program and read by a Text to Speech (TTS) engine when pressing on a button. 
+This application is able to get the french TV program and read by a Text to Speech (TTS) engine when pressing on a button. 
 This is especially useful for blind or disabled people.
 
 It use MaryTTS (https://github.com/marytts/marytts), an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI’s Language Technology Lab and the Institute of Phonetics at Saarland University. It is now maintained by the Multimodal Speech Processing Group in the Cluster of Excellence MMCI and DFKI.
@@ -25,17 +25,19 @@ This java program can run on a raspberry pi 2/3.
 * time like 13:15 will be converted in english to "Quarter past One" or "treize heure et quart"
 
 ## TVGuide
-* TVGuide now: give you the actual TVProgram on all channels running now +- x minutes
+* TVGuide now: give you the actual TVProgram on all channels running now 
 * TVGuideFromTO: configurable guide, for example all TVProgram tonight on all channels
 
 ## Configuration
-* Free and Premium channel can be filtered out in config.properties
+* `config.properties` is either located in classpath or in current directory, an example is located in `src/etc/config.properties`
+* Free and Premium channel can be filtered out in `config.properties`
 * Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than french
+
 
 # TTS sound engine
 
 ### Mary TTS
-Quite demanding on resources, even on a PI3 do not run so great.
+Quite demanding on resources, run offline, even on a PI3 do not run so great.
 
 * Voices can be configured, for french "upmc-pierre-hsmm" or "enst-camille-hsmm" is recommended
 
