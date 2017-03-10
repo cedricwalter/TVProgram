@@ -66,11 +66,39 @@ see also https://aws.amazon.com/polly/faqs/
 
 # Usages
 
-Get tv program running now
-`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now 5 10`
+## Get tv program running now
+`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now`
 
-Get tv program starting between 20:00 and 22:00
+**Example when TTSReader=NoOPTTSReader**
+```
+A la télévision en ce moment,
+Sur TF1, Egarement coupable, reste 12 minutes sur 100 minutes
+Sur France 2, Mille et une vies, reste 22 minutes sur 105 minutes
+Sur France 3, Rex, reste 7 minutes sur 45 minutes
+Sur France 5, Echo-logis, reste 22 minutes sur 30 minutes
+Sur M6, La boutique des secrets, reste 27 minutes sur 120 minutes
+Sur Arte, We Want Sex Equality, reste 27 minutes sur 130 minutes
+Sur C8, Maigret, reste 137 minutes sur 140 minutes
+Sur W9, Une nounou d'enfer, reste 22 minutes sur 30 minutes
+Sur TMC, Columbo, reste 17 minutes sur 85 minutes
+Sur NT1, Gossip Girl, reste 17 minutes sur 50 minutes
+Sur NRJ 12, Tellement vrai, reste 7 minutes sur 110 minutes
+Sur France 4, Par amour, reste 7 minutes sur 25 minutes
+Sur Gulli, Objectif Blake !, reste 6 minutes sur 11 minutes
+Sur RTL 9, Double visage, reste 7 minutes sur 95 minutes
+Sur HD1, New York, section criminelle, reste 32 minutes sur 55 minutes
+Sur 6ter, Docteur Quinn, femme médecin, reste 27 minutes sur 55 minutes
+```
+
+## Get tv program starting between 20:00 and 22:00
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar program "20:00" "22:00"`
+
+**Example when TTSReader=NoOPTTSReader**
+```
+Sur TF1, de 20:45 à 20:50, durée 5 minutes, Nos chers voisins Série humoristique > Stephan Kopecky > Martin Lamotte (Jean-Pierre Lambert) > Gil Alma (Alain Stuck) > Christelle Reboul (Amélie Dubernet-Carton) Problèmes de famille ou d'éducation, justice, religion, politique : la vie des voisins rebondit sur les sujets de société de manière drôle, cocasse ou touchante.
+Sur TF1, de 20:50 à 20:55, durée 5 minutes, C'est Canteloup Divertissement-humour > Nikos Aliagas > Nicolas Canteloup Détournements d'images d'actualité, parodies, interviews décalées, Nicolas Canteloup propose une satire des faits marquants de la journée avec, pour signature, ses imitations des personnages qui font l'événement dans le monde de la politique, du spectacle et des médias.
+...
+```
 
 # Raspberry PI
 
