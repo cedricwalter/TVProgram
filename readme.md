@@ -100,6 +100,14 @@ Sur TF1, de 20:50 à 20:55, durée 5 minutes, C'est Canteloup Divertissement-hum
 ...
 ```
 
+## running on pi
+![gpio](gpio-listener-example.png)
+
+`sudo java -jar tvprogram-1.0-SNAPSHOT-shaded.jar pi`
+
+* short press for what's now on TV
+* long press for TV program
+
 # Raspberry PI
 
 ## Required
