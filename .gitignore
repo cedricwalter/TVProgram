@@ -18,6 +18,7 @@ local.properties
 ### IDEA
 .idea/*.*
 .idea/*.iws
+.idea/libraries/*.*
 .idea/*.iml
 .idea/*.xml
 

@@ -1,5 +1,7 @@
-package com.waltercedric.tvprogram;
+package com.waltercedric.tvprogram.plugins.reader;
 
+import com.waltercedric.tvprogram.Config;
+import com.waltercedric.tvprogram.TVProgram;
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
 import freemarker.template.Configuration;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-class TVReader {
+public class TVReader {
 
     private static final Config config = new Config();
     private final MaryInterface maryTTS;

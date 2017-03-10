@@ -3,6 +3,7 @@ package com.waltercedric.tvprogram;
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.guide.TVGuideFromTo;
 import com.waltercedric.tvprogram.guide.TVGuideNow;
+import com.waltercedric.tvprogram.plugins.reader.TVReader;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
 import java.time.LocalTime;
