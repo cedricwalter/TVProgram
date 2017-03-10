@@ -13,6 +13,8 @@ public class Config {
 
     private final String builder;
     private final String timeToTextConverter;
+    private final String tvReader;
+
     private final String fromto_introduction;
     private final String fromto_each;
     private String sentenceNow_each;
@@ -43,13 +45,14 @@ public class Config {
 
         builder = props.getProperty("builder");
         timeToTextConverter = props.getProperty("TimeToTextConverter");
+        tvReader = props.getProperty("TVReader");
     }
 
     public TVProgramBuilder getBuilder() {
         try {
             return (TVProgramBuilder) Class.forName(builder).newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("builder class is wrongly set", e);
+            throw new RuntimeException("TVProgramBuilder class is wrongly set", e);
         }
     }
 
@@ -57,7 +60,15 @@ public class Config {
         try {
             return (TimeToTextConverter) Class.forName(timeToTextConverter).newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("builder class is wrongly set", e);
+            throw new RuntimeException("TimeToTextConverter key class is wrongly set", e);
+        }
+    }
+
+    public com.waltercedric.tvprogram.plugins.reader.TVReader getTVReader() {
+        try {
+            return (com.waltercedric.tvprogram.plugins.reader.TVReader) Class.forName(tvReader).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("TVReader class is wrongly set", e);
         }
     }
 
