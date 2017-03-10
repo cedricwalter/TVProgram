@@ -1,11 +1,10 @@
 package com.waltercedric.tvprogram.plugins.sources;
 
-import com.rometools.fetcher.impl.FeedFetcherCache;
-import com.rometools.fetcher.impl.HashMapFeedInfoCache;
-import com.rometools.fetcher.impl.HttpURLFeedFetcher;
 import com.rometools.rome.feed.synd.SyndCategory;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.SyndFeedInput;
+import com.rometools.rome.io.XmlReader;
 import com.waltercedric.tvprogram.TVProgram;
 import org.jsoup.Jsoup;
 
@@ -42,11 +41,9 @@ public class Webnext implements TVProgramBuilder {
         try {
             URL feedUrl = getTodayFeedURL();
 
-            FeedFetcherCache feedInfoCache = new HashMapFeedInfoCache();
-            // retrieve the feed the first time
-            // any subsequent request will use conditional gets and only
-            // retrieve the resource if it has changed
-            SyndFeed feed = new HttpURLFeedFetcher(feedInfoCache).retrieveFeed(feedUrl);
+            SyndFeedInput input = new SyndFeedInput();
+            SyndFeed feed = input.build(new XmlReader(feedUrl));
+
             List<SyndEntry> entries = feed.getEntries();
             for (SyndEntry entry : entries) {
                 TVProgram tvProgram = getTvProgramFromEntry(entry);
@@ -65,6 +62,7 @@ public class Webnext implements TVProgramBuilder {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
@@ -107,7 +105,9 @@ public class Webnext implements TVProgramBuilder {
             dayOfMonth = "0" + now.getDayOfMonth();
         }
 
-        return new URL("https://webnext.fr/epg_cache/programme-tv-rss_" + now.getYear() + "-" + monthValue + "-" + dayOfMonth + ".xml");
+        String spec = "https://webnext.fr/epg_cache/programme-tv-rss_" + now.getYear() + "-" + monthValue + "-" + dayOfMonth + ".xml";
+        System.out.println("Fetching RSS from " + spec);
+        return new URL(spec);
     }
 
 }

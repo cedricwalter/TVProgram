@@ -98,11 +98,6 @@
             <artifactId>rome</artifactId>
             <version>${rome.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.rometools</groupId>
-            <artifactId>rome-fetcher</artifactId>
-            <version>${rome.version}</version>
-        </dependency>
 
         <!--TODO http://pi4j.com/example/control.html-->
         <!--Activate the desired language-->
