@@ -162,14 +162,6 @@
             <version>1.8.3</version>
         </dependency>
 
-
-        <!-- Remote MaryTTS -->
-        <!--<dependency>-->
-        <!--<groupId>de.dfki.mary</groupId>-->
-        <!--<artifactId>marytts-client</artifactId>-->
-        <!--<version>${marytts.version}</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
@@ -186,7 +178,24 @@
             <version>5.0.0-M3</version>
         </dependency>
 
-
+        <!-- amazon polly tts-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-polly</artifactId>
+            <version>1.11.103</version>
+        </dependency>
+        <!-- mp3 audio player -->
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1-1</version>
+        </dependency>
+        <!-- required by aws client auth-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.6</version>
+        </dependency>
     </dependencies>
 
     <repositories>

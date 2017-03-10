@@ -12,7 +12,7 @@ public class TimeToEnglishTest {
         TimeToEnglish timeToEnglish = new TimeToEnglish();
         String text = timeToEnglish.convertTimeToText("1:15");
 
-        assertThat(text, is("Twelve past Twelve"));
+        assertThat(text, is("Quarter past One"));
     }
 
 }

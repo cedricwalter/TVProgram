@@ -17,6 +17,12 @@ public class Config {
 
     private final String fromto_introduction;
     private final String fromto_each;
+
+    private final String iam_access;
+    private final String iam_secret;
+    private final String aws_region;
+    private final String voiceid;
+
     private String sentenceNow_each;
     private String sentenceNow_introduction;
     private final String voice;
@@ -46,6 +52,11 @@ public class Config {
         tvProgramBuilder = props.getProperty("TVProgramBuilder");
         timeToTextConverter = props.getProperty("TimeToTextConverter");
         tvReader = props.getProperty("TVReader");
+
+        iam_access = props.getProperty("TVReader.PollyTTSReader.IAM-access");
+        iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
+        aws_region = props.getProperty("TVReader.PollyTTSReader.region");
+        voiceid = props.getProperty("TVReader.PollyTTSReader.voiceid");
     }
 
     public TVProgramBuilder getTvProgramBuilder() {
@@ -102,6 +113,22 @@ public class Config {
 
     public String getFromto_each() {
         return fromto_each;
+    }
+
+    public String getIam_access() {
+        return iam_access;
+    }
+
+    public String getIam_secret() {
+        return iam_secret;
+    }
+
+    public String getAws_region() {
+        return aws_region;
+    }
+
+    public String getVoiceid() {
+        return voiceid;
     }
 
 }
