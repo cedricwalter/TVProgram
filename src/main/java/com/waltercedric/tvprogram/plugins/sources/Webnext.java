@@ -22,6 +22,9 @@ import java.util.List;
  */
 public class Webnext implements TVProgramBuilder {
 
+    private static List<TVProgram> cache = null;
+    private static String cacheDate = null;
+
     private static final HashMap<String, String> channels = new HashMap<>();
 
     static {
@@ -35,10 +38,25 @@ public class Webnext implements TVProgramBuilder {
         channels.put("Gulli", "Gulli");
     }
 
-    public List<TVProgram> getTodayProgram() {
+    public synchronized List<TVProgram> getTodayProgram() {
+        if (cache == null) {
+            cacheDate = getDate();
+            cache = getProgramList();
+        }
+
+        if (!getDate().equals(cacheDate)) {
+            cacheDate = getDate();
+            cache = getProgramList();
+        }
+
+        return cache;
+    }
+
+    private List<TVProgram> getProgramList() {
         List<TVProgram> programs = new ArrayList<>();
 
         try {
+            System.out.println("Starting to build today's program");
             URL feedUrl = getTodayFeedURL();
 
             SyndFeedInput input = new SyndFeedInput();
@@ -65,7 +83,7 @@ public class Webnext implements TVProgramBuilder {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
+        System.out.println("Finished building today's program");
         return programs;
     }
 
@@ -93,6 +111,14 @@ public class Webnext implements TVProgramBuilder {
     }
 
     private URL getTodayFeedURL() throws MalformedURLException {
+        String date = getDate();
+
+        String spec = "https://webnext.fr/epg_cache/programme-tv-rss_" + date + ".xml";
+        System.out.println("Fetching RSS from " + spec);
+        return new URL(spec);
+    }
+
+    private String getDate() {
         LocalDateTime now = LocalDateTime.now();
 
         String monthValue = String.valueOf(now.getMonthValue());
@@ -105,9 +131,7 @@ public class Webnext implements TVProgramBuilder {
             dayOfMonth = "0" + now.getDayOfMonth();
         }
 
-        String spec = "https://webnext.fr/epg_cache/programme-tv-rss_" + now.getYear() + "-" + monthValue + "-" + dayOfMonth + ".xml";
-        System.out.println("Fetching RSS from " + spec);
-        return new URL(spec);
+        return now.getYear() + "-" + monthValue + "-" + dayOfMonth;
     }
 
 }
