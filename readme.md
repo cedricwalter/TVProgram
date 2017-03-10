@@ -122,6 +122,11 @@ Sur TF1, de 20:50 à 20:55, durée 5 minutes, C'est Canteloup Divertissement-hum
 ### Install Raspbian
 Raspbian is the Foundation’s official supported operating system. see https://www.raspberrypi.org/downloads/raspbian/
 
+### Timezone
+It is recommended to set properly the timezone at reboot
+`sudo raspi-config`
+configure Timezone using menu `4 Localization Options`
+
 ### Install JAVA
 Open a terminal and execute the following commands:
 
@@ -193,6 +198,9 @@ sudo vi /usr/share/alsa/alsa.conf
 
 ## Recurring
 Open a terminal and setup a cron job with the command `crontab -e` (for user specific job) or `sudo crontab -e` (for system wide job)
+ 
+**Attention** on raspberry pi you need root access to run TVProgram if you access GPIO port
+
 Go to the end of the file and add the following line
 
 `*/30 * * * * /PATH/TO/tvprogram.sh`
@@ -208,3 +216,17 @@ Go to the end of the file and add the following line
 │ │ └─────────────── day of month (1 - 31)
 │ └──────────────────── hour (0 - 23)
 └───────────────────────── min (0 - 59)
+
+### Cron log
+By default, the logging for the cron daemon is not enabled in Debian.
+To enable it, please open the file `/etc/rsyslog.conf` via
+
+`$ sudo vi /etc/rsyslog.conf`
+and uncomment the line
+
+`# cron.*  /var/log/cron.log`
+After that, you need to restart rsyslog via
+
+`$ /etc/init.d/rsyslog restart`
+
+and you will find the cron logs in `/var/log/cron.log`
