@@ -13,6 +13,7 @@ public class MaryTTSReader implements TTSReader {
     private static final Config config = new Config();
     private final MaryInterface maryTTS;
     private static Object object = new Object();
+    private AudioPlayer player;
 
     public MaryTTSReader() {
         try {
@@ -25,7 +26,7 @@ public class MaryTTSReader implements TTSReader {
 
     public void play(String sentenceToPlay) {
         synchronized (object) {
-            AudioPlayer player = new AudioPlayer();
+            player = new AudioPlayer();
             try {
                 player.setAudio(maryTTS.generateAudio(sentenceToPlay));
             } catch (SynthesisException e) {
@@ -33,6 +34,13 @@ public class MaryTTSReader implements TTSReader {
             }
             player.setPriority(10);
             player.run();
+        }
+    }
+
+    @Override
+    public void stop() {
+        if (player != null) {
+            player.stop();
         }
     }
 

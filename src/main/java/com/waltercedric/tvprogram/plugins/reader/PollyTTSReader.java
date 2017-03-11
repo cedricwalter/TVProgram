@@ -18,6 +18,7 @@ public class PollyTTSReader implements TTSReader {
     private static Object object = new Object();
     private volatile BasicAWSCredentials awsCreds;
     private final AmazonPollyClient polly;
+    private AdvancedPlayer player;
 
     public PollyTTSReader() {
         awsCreds = new BasicAWSCredentials(config.getIam_access(), config.getIam_secret());
@@ -37,8 +38,14 @@ public class PollyTTSReader implements TTSReader {
         }
     }
 
+    @Override
+    public void stop() {
+        if (player != null) {
+            player.stop();
+        }
+    }
+
     private void playSpeechResult(SynthesizeSpeechResult speechResult) {
-        AdvancedPlayer player;
         try {
             player = new AdvancedPlayer(speechResult.getAudioStream(),
                     javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice());

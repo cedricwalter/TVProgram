@@ -6,4 +6,9 @@ public class NoOPTTSReader implements TTSReader {
         System.out.println(sentenceToPlay);
     }
 
+    @Override
+    public void stop() {
+        System.out.println("Stopping TTS player.");
+    }
+
 }
