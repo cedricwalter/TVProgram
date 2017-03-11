@@ -28,9 +28,18 @@ This java program can run on a raspberry pi 2/3.
 * time like 13:15 can be converted in English to "Quarter past One" or "treize heure et quart"
 
 ## TVGuide
-* InteractiveTVGuide which can be used with 4 different buttons: time up/down and channel up/down, start reading first channel at current time, press time up or down for 15min increment, navigate channel list with 2 another push button
-* TVGuide now: give you the actual TVProgram on all channels running now.
-* TVGuideFromTO: configurable guide, for example all TVProgram tonight on all channels
+
+### InteractiveTVGuide 
+Can be used with 4 different buttons on Raspberry PI: time up/down and channel up/down
+ 
+Start reading first channel at current time, press time up or down for 15 min increment, navigate channel list with 2 another push button
+Any push on one of these button stop reading and move to next time slot or channel.
+
+### TVGuide now
+Give you the actual TVProgram on all channels running now.
+
+### TVGuideFromTO
+Configurable guide, for example all TVProgram tonight on all channels
 
 ## Configuration
 * `config.properties` is either located in classpath or in current directory, an example is located in `src/etc/config.properties`
