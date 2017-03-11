@@ -105,6 +105,15 @@ public class Config {
         return free;
     }
 
+    public List<String> getChannels() {
+        List<String> channels = free;
+        if (usePremium) {
+            channels.addAll(premium);
+        }
+
+        return channels;
+    }
+
     public String getSentenceNow_each() {
         return sentenceNow_each;
     }
