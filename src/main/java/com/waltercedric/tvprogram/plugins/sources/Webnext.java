@@ -93,6 +93,7 @@ public class Webnext implements TVProgramBuilder {
 
         String category = Jsoup.parse(o.getName()).text();
         String description = Jsoup.parse(entry.getDescription().getValue()).text();
+        description = description.replaceAll("\\>", " et");
 
         String text = Jsoup.parse(entry.getTitle()).text();
         String[] split = text.split("\\|");
