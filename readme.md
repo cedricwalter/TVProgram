@@ -6,8 +6,9 @@
 
 [![TVprogram](https://img.youtube.com/vi/bEzWkPFL3ns/0.jpg)](https://youtu.be/bEzWkPFL3ns)
 
-This application is able to get the french TV program and read by a Text to Speech (TTS) engine when pressing on a button. 
-This is especially useful for blind or disabled people.
+This application is able to get the TV program and read with a Text to Speech (TTS) engine. 
+
+This is especially useful for blind or disabled people. It run on a raspberry pi, can be used with physical buttons, crontab, command line.
 
 It use MaryTTS (https://github.com/marytts/marytts), an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI’s Language Technology Lab and the Institute of Phonetics at Saarland University. It is now maintained by the Multimodal Speech Processing Group in the Cluster of Excellence MMCI and DFKI.
 As of version 5.2, MaryTTS supports German, British and American English, French, Italian, Luxembourgish, Russian, Swedish, Telugu, and Turkish; more languages are in preparation. MaryTTS comes with toolkits for quickly adding support for new languages and for building unit selection and HMM-based synthesis voices.
@@ -19,19 +20,20 @@ Amazon AWS Polly https://aws.amazon.com/polly/
 This java program can run on a raspberry pi 2/3. 
 
 ## Currently
-* TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided
+* TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided, adding yours is easy
 * RSS is cached for more efficiency
 * A TVGuide is build and then read by either MaryTTS http://mary.dfki.de/ or Amazon AWS Polly
-* time like 13:15 will be converted in english to "Quarter past One" or "treize heure et quart"
+* time like 13:15 can be converted in English to "Quarter past One" or "treize heure et quart"
 
 ## TVGuide
-* TVGuide now: give you the actual TVProgram on all channels running now 
+* InteractiveTVGuide which can be used with 4 different buttons: time up/down and channel up/down, start reading first channel at current time, press time up or down for 15min increment, navigate channel list with 2 another push button
+* TVGuide now: give you the actual TVProgram on all channels running now.
 * TVGuideFromTO: configurable guide, for example all TVProgram tonight on all channels
 
 ## Configuration
 * `config.properties` is either located in classpath or in current directory, an example is located in `src/etc/config.properties`
 * Free and Premium channel can be filtered out in `config.properties`
-* Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than french
+* Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than French.
 
 # TTS sound engine
 
@@ -48,9 +50,9 @@ voice=upmc-pierre-hsmm
 ```
 
 ### Amazon AWS Polly
-Sound great but send data to cloud, 42 languages supported, free tier: 1 million character read per month
+Sound great but send data to cloud, 42 languages supported, free tier: 5 million character read per month
 
-Pricing and Availability
+#### Pricing and Availability
 You can use Polly to process 5 million characters per month at no charge. After that, you pay $0.000004 per character, 
 or about $0.004 per minute of generated audio. That works out to about $0.018 for this blog post, 
 or around $2.40 for the full text of Adventures of Huckleberry Finn.
@@ -80,6 +82,11 @@ TVReader.PollyTTSReader.voiceid=Mathieu
 see also https://aws.amazon.com/polly/faqs/
 
 # Usages
+
+## Interactive guide
+Recommended to run on a pi with 4 digital buttons
+
+`java -jar tvprogram-1.0-SNAPSHOT-shaded.jar interactive`
 
 ## Get tv program running now
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now`

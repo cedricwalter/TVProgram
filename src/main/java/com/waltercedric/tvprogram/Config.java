@@ -30,6 +30,10 @@ public class Config {
     private List<String> free;
     private List<String> premium;
     private boolean usePremium;
+    private String channelUpPin;
+    private String channelDownPin;
+    private String timeUpPin;
+    private String timeDownPin;
 
     public Config() {
         InputStream resourceAsStream = getClass().getResourceAsStream("/config.properties");
@@ -60,6 +64,12 @@ public class Config {
             iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
             aws_region = props.getProperty("TVReader.PollyTTSReader.region");
             voiceid = props.getProperty("TVReader.PollyTTSReader.voiceid");
+
+            channelUpPin = props.getProperty("gpio.channel.up");
+            channelDownPin = props.getProperty("gpio.channel.down");
+            timeUpPin = props.getProperty("gpio.time.up");
+            timeDownPin = props.getProperty("gpio.time.down");
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -146,4 +156,19 @@ public class Config {
         return voiceid;
     }
 
+    public String getChannelUpPin() {
+        return channelUpPin;
+    }
+
+    public String getChannelDownPin() {
+        return channelDownPin;
+    }
+
+    public String getTimeUpPin() {
+        return timeUpPin;
+    }
+
+    public String getTimeDownPin() {
+        return timeDownPin;
+    }
 }

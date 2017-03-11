@@ -3,6 +3,7 @@ package com.waltercedric.tvprogram;
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
+import com.waltercedric.tvprogram.guide.InteractiveTVGuide;
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.guide.TVGuideFromTo;
 import com.waltercedric.tvprogram.guide.TVGuideNow;
@@ -21,8 +22,105 @@ class Main {
             executeNowOnTV();
         } else if ("program".equals(args[0])) {
             executeTVProgram(args);
+        } else if ("interactive".equals(args[0])) {
+            executeInteractive(args);
         }
     }
+
+    private static void executeInteractive(String[] args) throws InterruptedException {
+        final GpioController gpio = GpioFactory.getInstance();
+
+        Config config = new Config();
+        TVProgramBuilder builder = config.getTvProgramBuilder();
+        LocalTime now = LocalTime.now();
+
+        InteractiveTVGuide tvGuide = new InteractiveTVGuide(config, builder.getTodayProgram(), now);
+
+        TVReader tvReader = new TVReader();
+
+        final GpioPinDigitalInput channelUp = gpio.provisionDigitalInputPin(RaspiPin.getPinByName(config.getChannelUpPin()), PinPullResistance.PULL_DOWN);
+        channelUp.setShutdownOptions(true);
+        channelUp.addListener(new GpioPinListenerDigital() {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                if (event.getState().equals(PinState.HIGH)) {
+                    synchronized (object) {
+                        tvGuide.channelUp();
+                        try {
+                            tvReader.stop();
+                            tvReader.read(tvGuide);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+        final GpioPinDigitalInput channelDown = gpio.provisionDigitalInputPin(RaspiPin.getPinByName(config.getChannelDownPin()), PinPullResistance.PULL_DOWN);
+        channelDown.setShutdownOptions(true);
+        channelDown.addListener(new GpioPinListenerDigital() {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                if (event.getState().equals(PinState.HIGH)) {
+                    synchronized (object) {
+                        tvGuide.channelDown();
+                        try {
+                            tvReader.stop();
+                            tvReader.read(tvGuide);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+        final GpioPinDigitalInput timeUp = gpio.provisionDigitalInputPin(RaspiPin.getPinByName(config.getTimeUpPin()), PinPullResistance.PULL_DOWN);
+        timeUp.setShutdownOptions(true);
+        timeUp.addListener(new GpioPinListenerDigital() {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                if (event.getState().equals(PinState.HIGH)) {
+                    synchronized (object) {
+                        tvGuide.timeUp();
+                        try {
+                            tvReader.stop();
+                            tvReader.read(tvGuide);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+        final GpioPinDigitalInput timeDown = gpio.provisionDigitalInputPin(RaspiPin.getPinByName(config.getTimeDownPin()), PinPullResistance.PULL_DOWN);
+        timeDown.setShutdownOptions(true);
+        timeDown.addListener(new GpioPinListenerDigital() {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                if (event.getState().equals(PinState.HIGH)) {
+                    synchronized (object) {
+                        tvGuide.timeDown();
+                        try {
+                            tvReader.stop();
+                            tvReader.read(tvGuide);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
+
+        System.out.println("Keep program running until user aborts (CTRL-C)");
+        while (true) {
+            Thread.sleep(1000);
+        }
+    }
+
 
     /**
      * read GPIO pin, need to run as root to be able to read pin

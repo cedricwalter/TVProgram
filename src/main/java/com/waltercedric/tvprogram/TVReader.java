@@ -52,5 +52,8 @@ public class TVReader {
         TTSReader.play(sentenceToPlay);
     }
 
+    public void stop() {
+        TTSReader.stop();
+    }
 
 }
