@@ -13,12 +13,13 @@ public class TVGuideFromTo implements TVGuide {
     private final List<TVProgram> programs;
     private final LocalTime from;
     private final LocalTime to;
-    private final Config config = new Config();
+    private final Config config;
 
-    public TVGuideFromTo(List<TVProgram> programs, LocalTime from, LocalTime to) {
+    public TVGuideFromTo(Config config, List<TVProgram> programs, LocalTime from, LocalTime to) {
         this.programs = programs;
         this.from = from;
         this.to = to;
+        this.config = config;
     }
 
     @Override

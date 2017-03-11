@@ -11,12 +11,13 @@ import java.util.List;
 public class TVGuideNow implements TVGuide {
 
     private final List<TVProgram> programs;
-    private final Config config = new Config();
+    private final Config config;
     private final LocalTime now;
 
-    public TVGuideNow(List<TVProgram> programs, LocalTime now) {
+    public TVGuideNow(Config config, List<TVProgram> programs, LocalTime now) {
         this.programs = programs;
         this.now = now;
+        this.config = config;
     }
 
     @Override
