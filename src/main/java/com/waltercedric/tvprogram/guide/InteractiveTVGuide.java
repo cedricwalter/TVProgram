@@ -63,12 +63,12 @@ public class InteractiveTVGuide implements TVGuide {
 
     @Override
     public String getIntroduction() {
-        return config.getSentenceNow_introduction();
+        return config.getInteractiveTVGuide_introduction();
     }
 
     @Override
     public String getForEachProgram() {
-        return config.getSentenceNow_each();
+        return config.getInteractiveTVGuide_each();
     }
 
     public LocalTime getTimeCursor() {

@@ -34,6 +34,8 @@ public class Config {
     private String channelDownPin;
     private String timeUpPin;
     private String timeDownPin;
+    private String interactiveTVGuide_introduction;
+    private String interactiveTVGuide_each;
 
     public Config() {
         InputStream resourceAsStream = getClass().getResourceAsStream("/config.properties");
@@ -52,6 +54,9 @@ public class Config {
 
             sentenceNow_introduction = props.getProperty("TVGuideNow.introduction");
             sentenceNow_each = props.getProperty("TVGuideNow.each");
+
+            interactiveTVGuide_introduction = props.getProperty("InteractiveTVGuide.introduction");
+            interactiveTVGuide_each = props.getProperty("InteractiveTVGuide.each");
 
             fromto_introduction = props.getProperty("TVGuideFromTo.introduction");
             fromto_each = props.getProperty("TVGuideFromTo.each");
@@ -170,5 +175,13 @@ public class Config {
 
     public String getTimeDownPin() {
         return timeDownPin;
+    }
+
+    public String getInteractiveTVGuide_introduction() {
+        return interactiveTVGuide_introduction;
+    }
+
+    public String getInteractiveTVGuide_each() {
+        return interactiveTVGuide_each;
     }
 }

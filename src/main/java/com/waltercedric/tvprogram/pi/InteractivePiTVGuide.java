@@ -39,7 +39,7 @@ public class InteractivePiTVGuide {
                         tvGuide.channelUp();
                         try {
                             tvReader.stop();
-                            tvReader.read(tvGuide);
+                            tvReader.read(tvGuide.getTimeCursor(), tvGuide);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -59,7 +59,7 @@ public class InteractivePiTVGuide {
                         tvGuide.channelDown();
                         try {
                             tvReader.stop();
-                            tvReader.read(tvGuide);
+                            tvReader.read(tvGuide.getTimeCursor(), tvGuide);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -79,7 +79,7 @@ public class InteractivePiTVGuide {
                         tvGuide.timeUp();
                         try {
                             tvReader.stop();
-                            tvReader.read(tvGuide);
+                            tvReader.read(tvGuide.getTimeCursor(), tvGuide);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -99,7 +99,7 @@ public class InteractivePiTVGuide {
                         tvGuide.timeDown();
                         try {
                             tvReader.stop();
-                            tvReader.read(tvGuide);
+                            tvReader.read(tvGuide.getTimeCursor(), tvGuide);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

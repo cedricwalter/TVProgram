@@ -72,7 +72,7 @@ class Main {
         TVProgramBuilder builder = config.getTvProgramBuilder();
         LocalTime now = LocalTime.now();
         TVGuide guideNow = new TVGuideNow(config, builder.getTodayProgram(), now);
-        new TVReader().read(guideNow);
+        new TVReader().read(now, guideNow);
     }
 
     /**
@@ -84,8 +84,9 @@ class Main {
     private static void executeTVProgram(String[] args) throws Exception {
         Config config = new Config();
         TVProgramBuilder builder = config.getTvProgramBuilder();
+        LocalTime now = LocalTime.now();
         TVGuide guideFromTo = new TVGuideFromTo(config, builder.getTodayProgram(), LocalTime.parse(args[1]), LocalTime.parse(args[2]));
-        new TVReader().read(guideFromTo);
+        new TVReader().read(now, guideFromTo);
     }
 
 }

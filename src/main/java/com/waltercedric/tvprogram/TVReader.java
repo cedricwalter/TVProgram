@@ -8,6 +8,7 @@ import freemarker.template.Template;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,16 +23,16 @@ public class TVReader {
         this.TTSReader = config.getTTSReader();
     }
 
-    public void read(TVGuide guide) throws Exception {
+    public void read(LocalTime time, TVGuide guide) throws Exception {
         List<TVProgram> programs = guide.getProgram();
 
         TTSReader.play(guide.getIntroduction());
         for (TVProgram tvProgram : programs) {
-            play(tvProgram, guide.getForEachProgram());
+            play(time, tvProgram, guide.getForEachProgram());
         }
     }
 
-    private void play(TVProgram tvProgram, String sentence) throws Exception {
+    private void play(LocalTime time, TVProgram tvProgram, String sentence) throws Exception {
         Template template = new Template("templateName", new StringReader(sentence), new Configuration());
 
         HashMap<String, String> parameters = new HashMap<>();
@@ -43,6 +44,7 @@ public class TVReader {
         parameters.put("end", timeToTextConverter.convertTimeToText(tvProgram.getEndTime().toString()));
         parameters.put("duration", tvProgram.getDuration().toString());
         parameters.put("left", String.valueOf(tvProgram.getRestTime()));
+        parameters.put("time", time.toString());
 
         StringWriter output = new StringWriter();
         template.process(parameters, output);
