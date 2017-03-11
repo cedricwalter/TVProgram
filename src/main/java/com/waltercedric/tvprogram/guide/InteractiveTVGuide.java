@@ -71,4 +71,7 @@ public class InteractiveTVGuide implements TVGuide {
         return config.getSentenceNow_each();
     }
 
+    public LocalTime getTimeCursor() {
+        return timeCursor;
+    }
 }
