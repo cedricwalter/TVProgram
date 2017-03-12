@@ -65,20 +65,13 @@ Sound great but send data to cloud, 42 languages supported, free tier: 5 million
 
 #### Pricing and Availability
 You can use Polly to process 5 million characters per month at no charge. After that, you pay $0.000004 per character, 
-or about $0.004 per minute of generated audio. That works out to about $0.018 for this blog post, 
-or around $2.40 for the full text of Adventures of Huckleberry Finn.
+or about $0.004 per minute of generated audio. That works out to about $2.40 for the full text of Adventures of Huckleberry Finn.
 
 Polly is available now in the US East (Northern Virginia), US West (Oregon), US East (Ohio), and EU (Ireland) Regions
 
-English American, French, Portuguese, Brazilian
-English Australian	French, Canadian	,Romanian
-English British	German	Russian
-English Indian	Icelandic	Spanish, Castilian
-English Welsh	Italian	Spanish, American
-Welsh	Japanese	Swedish
-Danish	Polish	Turkish
-Dutch	Portuguese
-Norwegian
+English American, French, Portuguese, Brazilian, English Australian, French Canadian, Romanian
+English British, German, Russian, English Indian, Icelandic, Spanish, Castilian, English Welsh, Italian	Spanish, American
+Welsh, Japanese, Swedish, Danish, Polish, Turkish, Dutch, Portuguese, Norwegian
 
 #### config.properties
 Set at least the following
@@ -92,12 +85,19 @@ TVReader.PollyTTSReader.voiceid=Mathieu
 
 see also https://aws.amazon.com/polly/faqs/
 
-# Usages
+# Different TV Guide
 
 ## Interactive guide
+![interactive.png](interactive.png)
 Recommended to run on a pi with 4 digital buttons
 
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar interactive`
+
+The natural order in config.properties for channel is taken, in a circular fashion
+free=channel1,channel2,channel3
+if you press more than 3 times on channel up button, you will start again on channel1
+
+Pin names can be assigned (mapping) in config.properties
 
 ## Get tv program running now
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now`
