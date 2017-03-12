@@ -25,31 +25,29 @@ This java program can run on a raspberry pi 2/3.
 * TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided, adding yours is easy
 * RSS is cached for more efficiency
 * A TVGuide is build and then read by either MaryTTS http://mary.dfki.de/ or Amazon AWS Polly
-* time like 13:15 can be converted in English to "Quarter past One" or "treize heure et quart"
-
-## TVGuide
-
-### InteractiveTVGuide 
-Can be used with 4 different buttons on Raspberry PI: time up/down and channel up/down
- 
-Start reading first channel at current time, press time up or down for 15 min increment, navigate channel list with 2 another push button
-Any push on one of these button stop reading and move to next time slot or channel.
-
-### TVGuide now
-Give you the actual TVProgram on all channels running now.
-
-### TVGuideFromTO
-Configurable guide, for example all TVProgram tonight on all channels
+* Time like 13:15 can be converted in English to "Quarter past One" or "treize heure et quart"
 
 ## Configuration
+
+You need to configure the TV program source `TVProgramBuilder`, a text to sound engine `TTSReader` in config.properties.
+The TVGuide type is selected with command line or by using Button on Raspberry PI.
+
 * `config.properties` is either located in classpath or in current directory, an example is located in `src/etc/config.properties`
 * Free and Premium channel can be filtered out in `config.properties`
 * Sentences are templates driven (http://freemarker.org/) for easy customization and translation to something else than French.
 
-# TTS sound engine
+# TVProgramBuilder
 
-### Mary TTS
-Quite demanding on resources, run offline, even on a PI3 do not run so great.
+Provider of TVProgram RSS feed. Only one provider is supported plugin can be written to support any Providers.
+
+`TVProgramBuilder=com.waltercedric.tvprogram.plugins.sources.Webnext`
+
+# TTSReader sound engine
+
+TVprogram support many TTS engine, choose one by setting the key `TTSReader` in `config.properties`
+
+### MaryTTSReader
+Mary TTS: Quite demanding on resources, run offline, even on a PI3 do not run so great.
 
 * Voices can be configured, for french "upmc-pierre-hsmm" or "enst-camille-hsmm" is recommended
 
@@ -60,18 +58,17 @@ TVReader=com.waltercedric.tvprogram.plugins.reader.MaryTTSReader
 voice=upmc-pierre-hsmm
 ```
 
-### Amazon AWS Polly
-Sound great but send data to cloud, 42 languages supported, free tier: 5 million character read per month
+### PollyTTSReader
+Amazon AWS Polly: Sound great but send data to cloud, 42 languages supported:
+English American, French, Portuguese, Brazilian, English Australian, French Canadian, Romanian
+English British, German, Russian, English Indian, Icelandic, Spanish, Castilian, English Welsh, Italian	Spanish, American
+Welsh, Japanese, Swedish, Danish, Polish, Turkish, Dutch, Portuguese, Norwegian
 
 #### Pricing and Availability
 You can use Polly to process 5 million characters per month at no charge. After that, you pay $0.000004 per character, 
 or about $0.004 per minute of generated audio. That works out to about $2.40 for the full text of Adventures of Huckleberry Finn.
 
 Polly is available now in the US East (Northern Virginia), US West (Oregon), US East (Ohio), and EU (Ireland) Regions
-
-English American, French, Portuguese, Brazilian, English Australian, French Canadian, Romanian
-English British, German, Russian, English Indian, Icelandic, Spanish, Castilian, English Welsh, Italian	Spanish, American
-Welsh, Japanese, Swedish, Danish, Polish, Turkish, Dutch, Portuguese, Norwegian
 
 #### config.properties
 Set at least the following
@@ -85,9 +82,19 @@ TVReader.PollyTTSReader.voiceid=Mathieu
 
 see also https://aws.amazon.com/polly/faqs/
 
+### NoOPTTSReader
+Do not read aloud text but log sentences to system out.
+
 # Different TV Guide
 
+TVprogram support many TV Guide implementations.
+
 ## Interactive guide
+Can be used with 4 different buttons on Raspberry PI: time up/down and channel up/down
+ 
+Start reading first channel at current time, press time up or down for 15 min increment, navigate channel list with 2 another push button
+Any push on one of these button stop reading and move to next time slot or channel.
+
 ![interactive.png](interactive.png)
 Recommended to run on a pi with 4 digital buttons
 
@@ -100,6 +107,8 @@ if you press more than 3 times on channel up button, you will start again on cha
 Pin names can be assigned (mapping) in config.properties
 
 ## Get tv program running now
+Give you the actual TVProgram on all channels running now.
+
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar now`
 
 **Example when TTSReader=NoOPTTSReader**
@@ -124,6 +133,8 @@ Sur 6ter, Docteur Quinn, femme médecin, reste 27 minutes sur 55 minutes
 ```
 
 ## Get tv program starting between 20:00 and 22:00
+Configurable guide, for example all TVProgram tonight on all channels
+
 `java -jar tvprogram-1.0-SNAPSHOT-shaded.jar program "20:00" "22:00"`
 
 **Example when TTSReader=NoOPTTSReader**
