@@ -17,38 +17,46 @@ public class InteractiveTVGuide implements TVGuide {
     private LocalTime timeCursor;
     private int channelCursor;
 
-    public InteractiveTVGuide(Config config, List<TVProgram> programs, LocalTime now) {
+    public InteractiveTVGuide(Config config, List<TVProgram> programs, LocalTime now, int channelCursor) {
         this.programs = programs;
         this.config = config;
 
         this.timeCursor = now;
-        this.channelCursor = 0;
+        this.channelCursor = channelCursor;
 
         this.channels = new CircularList<>();
         channels.addAll(config.getChannels());
     }
 
-    public void timeUp() {
-        this.timeCursor = this.timeCursor.plusMinutes(15);
+    public LocalTime timeUp() {
+        this.timeCursor = this.timeCursor.plusMinutes(30);
+
+        return this.timeCursor;
     }
 
-    public void timeDown() {
-        this.timeCursor = this.timeCursor.minusMinutes(15);
+    public LocalTime timeDown() {
+        this.timeCursor = this.timeCursor.minusMinutes(30);
+
+        return this.timeCursor;
     }
 
-    public void channelUp() {
+    public int channelUp() {
         this.channelCursor += 1;
+
+        return this.channelCursor;
     }
 
-    public void channelDown() {
+    public int channelDown() {
         this.channelCursor -= 1;
+
+        return this.channelCursor;
     }
 
     public List<TVProgram> getProgram() {
         // filter by time cursor
         TVGuideNow tvGuideNow = new TVGuideNow(config, programs, timeCursor);
 
-        // filter by select channel
+        // filter by selected channel
         List<TVProgram> programOnChannelAtThatTime = new ArrayList<>();
         String desiredChannel = channels.get(channelCursor);
 

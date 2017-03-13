@@ -26,7 +26,7 @@ class InteractiveTVGuideTest {
 
         List<TVProgram> list = getTVProgram();
 
-        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 10));
+        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 10), 0);
 
         // act
         interactiveTVGuide.channelUp();
@@ -44,7 +44,7 @@ class InteractiveTVGuideTest {
 
         List<TVProgram> list = getTVProgram();
 
-        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 10));
+        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 10), 0);
 
         // act
         interactiveTVGuide.channelUp();
@@ -64,7 +64,7 @@ class InteractiveTVGuideTest {
 
         List<TVProgram> list = getTVProgram();
 
-        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 10));
+        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 10), 0);
 
         // act
         interactiveTVGuide.channelUp();  //bad to use up to test down
@@ -84,7 +84,7 @@ class InteractiveTVGuideTest {
 
         List<TVProgram> list = getTVProgram();
 
-        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(10, 0));
+        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(10, 0), 0);
 
         // act
         List<TVProgram> program = interactiveTVGuide.getProgram();
@@ -100,7 +100,7 @@ class InteractiveTVGuideTest {
 
         List<TVProgram> list = getTVProgram();
 
-        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 30));
+        InteractiveTVGuide interactiveTVGuide = new InteractiveTVGuide(config, list, LocalTime.of(9, 30), 0);
 
         // act
         interactiveTVGuide.timeDown(); // channel1 is still set

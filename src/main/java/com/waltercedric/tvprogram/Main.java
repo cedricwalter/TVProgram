@@ -6,7 +6,6 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.guide.TVGuideFromTo;
 import com.waltercedric.tvprogram.guide.TVGuideNow;
-import com.waltercedric.tvprogram.pi.InteractivePiTVGuide;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
 import java.time.LocalTime;
@@ -14,6 +13,7 @@ import java.time.LocalTime;
 class Main {
 
     private static Object object = new Object();
+    private static final Config config = new Config();
 
     public static void main(String[] args) throws Exception {
         if ("pi".equals(args[0])) {
@@ -23,7 +23,7 @@ class Main {
         } else if ("program".equals(args[0])) {
             executeTVProgram(args);
         } else if ("interactive".equals(args[0])) {
-            new InteractivePiTVGuide().execute();
+            config.getRunner().execute();
         }
     }
 

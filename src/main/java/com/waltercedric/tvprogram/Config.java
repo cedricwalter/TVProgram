@@ -1,5 +1,6 @@
 package com.waltercedric.tvprogram;
 
+import com.waltercedric.tvprogram.pi.runner.Runner;
 import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
 import com.waltercedric.tvprogram.plugins.reader.TTSReader;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
@@ -23,6 +24,7 @@ public class Config {
     private final String iam_secret;
     private final String aws_region;
     private final String voiceid;
+    private final String înteractiveTVGuideRunner;
 
     private String sentenceNow_each;
     private String sentenceNow_introduction;
@@ -65,15 +67,17 @@ public class Config {
             timeToTextConverter = props.getProperty("TimeToTextConverter");
             ttsReader = props.getProperty("TTSReader");
 
+            înteractiveTVGuideRunner = props.getProperty("InteractiveTVGuide.runner");
+
             iam_access = props.getProperty("TVReader.PollyTTSReader.IAM-access");
             iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
             aws_region = props.getProperty("TVReader.PollyTTSReader.region");
             voiceid = props.getProperty("TVReader.PollyTTSReader.voiceid");
 
-            channelUpPin = props.getProperty("gpio.channel.up");
-            channelDownPin = props.getProperty("gpio.channel.down");
-            timeUpPin = props.getProperty("gpio.time.up");
-            timeDownPin = props.getProperty("gpio.time.down");
+            channelUpPin = props.getProperty("CustomPiRunner.gpio.channel.up");
+            channelDownPin = props.getProperty("CustomPiRunner.gpio.channel.down");
+            timeUpPin = props.getProperty("CustomPiRunner.gpio.time.up");
+            timeDownPin = props.getProperty("CustomPiRunner.gpio.time.down");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -183,5 +187,13 @@ public class Config {
 
     public String getInteractiveTVGuide_each() {
         return interactiveTVGuide_each;
+    }
+
+    public Runner getRunner() {
+        try {
+            return (Runner) Class.forName(înteractiveTVGuideRunner).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("TTSReader class is wrongly set", e);
+        }
     }
 }
