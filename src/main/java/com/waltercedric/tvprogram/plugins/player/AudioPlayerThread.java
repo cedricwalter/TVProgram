@@ -26,7 +26,7 @@ public class AudioPlayerThread implements Runnable {
         playerThread.start();
     }
 
-    public void stopPlayer() throws JavaLayerException {
+    public void stopPlayer() {
         if (player != null) {
             player.cancel();
             player = null;

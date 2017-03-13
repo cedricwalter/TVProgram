@@ -29,7 +29,7 @@ public class JavaZoomPlayerThread implements Runnable {
         playerThread.start();
     }
 
-    public void stopPlayer() throws JavaLayerException {
+    public void stopPlayer() {
         if (player != null) {
             player.close();
             player = null;
