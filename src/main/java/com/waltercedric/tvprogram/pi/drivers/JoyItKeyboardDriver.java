@@ -97,6 +97,7 @@ public class JoyItKeyboardDriver {
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
+                    //do nothing
                 }
                 break;
             }
