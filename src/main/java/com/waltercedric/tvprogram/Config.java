@@ -24,13 +24,19 @@ public class Config {
     private final String iam_secret;
     private final String aws_region;
     private final String voiceid;
-    private final String înteractiveTVGuideRunner;
 
+    private final String înteractiveTVGuideRunner;
 
     private final String timeIncrement;
 
+    private final String joyItChannelUp;
+    private final String joyItChannelDown;
+    private final String joyItTimeUp;
+    private final String joyItTimeDown;
+
     private String sentenceNow_each;
     private String sentenceNow_introduction;
+
     private final String voice;
     private List<String> free;
     private List<String> premium;
@@ -41,7 +47,6 @@ public class Config {
     private String timeDownPin;
     private String interactiveTVGuide_introduction;
     private String interactiveTVGuide_each;
-
     public Config() {
         InputStream resourceAsStream = getClass().getResourceAsStream("/config.properties");
         Properties props = new Properties();
@@ -81,6 +86,12 @@ public class Config {
             channelDownPin = props.getProperty("CustomPiRunner.gpio.channel.down");
             timeUpPin = props.getProperty("CustomPiRunner.gpio.time.up");
             timeDownPin = props.getProperty("CustomPiRunner.gpio.time.down");
+
+            joyItChannelUp = props.getProperty("JoyItKeyboardPiRunner.channel.up");
+            joyItChannelDown = props.getProperty("JoyItKeyboardPiRunner.channel.down");
+            joyItTimeUp = props.getProperty("JoyItKeyboardPiRunner.time.up");
+            joyItTimeDown = props.getProperty("JoyItKeyboardPiRunner.time.down");
+
             timeIncrement = props.getProperty("InteractiveTVGuide.time.increment");
 
         } catch (Exception e) {
@@ -203,5 +214,21 @@ public class Config {
 
     public int getTimeIncrement() {
         return Integer.valueOf(timeIncrement);
+    }
+
+    public int getJoyItChannelUp() {
+        return Integer.parseInt(joyItChannelUp);
+    }
+
+    public int getJoyItChannelDown() {
+        return Integer.parseInt(joyItChannelDown);
+    }
+
+    public int getJoyItTimeUp() {
+        return Integer.parseInt(joyItTimeUp);
+    }
+
+    public int getJoyItTimeDown() {
+        return Integer.parseInt(joyItTimeDown);
     }
 }

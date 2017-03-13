@@ -37,7 +37,7 @@ public class JoyItKeyboardPiRunner implements Runner {
 
         synchronized (object) {
             int keyPressed = keyboard.getKeyPressed();
-            if (keyPressed == 1) {
+            if (keyPressed == config.getJoyItChannelUp()) {
                 System.out.println("Channel UP pressed");
                 InteractiveTVGuide tvGuide = new InteractiveTVGuide(config, builder.getTodayProgram(), now, channelCursor);
                 channelCursor = tvGuide.channelUp();
@@ -48,7 +48,7 @@ public class JoyItKeyboardPiRunner implements Runner {
                     e.printStackTrace();
                 }
             }
-            if (keyPressed == 2) {
+            if (keyPressed == config.getJoyItChannelDown()) {
                 System.out.println("Channel Down pressed");
                 InteractiveTVGuide tvGuide = new InteractiveTVGuide(config, builder.getTodayProgram(), now, channelCursor);
                 channelCursor = tvGuide.channelDown();
@@ -59,7 +59,7 @@ public class JoyItKeyboardPiRunner implements Runner {
                     e.printStackTrace();
                 }
             }
-            if (keyPressed == 3) {
+            if (keyPressed == config.getJoyItTimeUp()) {
                 System.out.println("Time UP pressed");
                 InteractiveTVGuide tvGuide = new InteractiveTVGuide(config, builder.getTodayProgram(), now, channelCursor);
                 now = tvGuide.timeUp();
@@ -70,7 +70,7 @@ public class JoyItKeyboardPiRunner implements Runner {
                     e.printStackTrace();
                 }
             }
-            if (keyPressed == 4) {
+            if (keyPressed == config.getJoyItTimeDown()) {
                 System.out.println("Time Down pressed");
                 InteractiveTVGuide tvGuide = new InteractiveTVGuide(config, builder.getTodayProgram(), now, channelCursor);
                 now = tvGuide.timeDown();
