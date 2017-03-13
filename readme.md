@@ -100,13 +100,21 @@ There is currently 3 runner available, key `InteractiveTVGuide.runner`:
 
 ![joy-it-keyboard.jpg](joy-it-keyboard.jpg)
 
-You can define your own GPIO mapping to function:
+You can define your own GPIO mapping to function for CustomPiRunner:
 ```
 CustomPiRunner.gpio.channel.up=GPIO 2
 CustomPiRunner.gpio.channel.down=GPIO 3
 CustomPiRunner.gpio.time.up=GPIO 4
 CustomPiRunner.gpio.time.down=GPIO 5
  ```
+ 
+You can define your own GPIO mapping to function for JoyItKeyboardPiRunner:
+```
+JoyItKeyboardPiRunner.channel.up=1
+JoyItKeyboardPiRunner.channel.down=2
+JoyItKeyboardPiRunner.time.up=3
+JoyItKeyboardPiRunner.time.down=4
+```
  
 It start reading first channel at current time, press time up or down for 30 min increment, navigate channel list with 2 another push button
 Any push on one of these button move to next time slot or channel.
