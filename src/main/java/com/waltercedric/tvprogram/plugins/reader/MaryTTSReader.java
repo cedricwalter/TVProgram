@@ -1,11 +1,13 @@
 package com.waltercedric.tvprogram.plugins.reader;
 
 import com.waltercedric.tvprogram.Config;
+import com.waltercedric.tvprogram.plugins.player.AudioPlayerThread;
+import javazoom.jl.decoder.JavaLayerException;
 import marytts.LocalMaryInterface;
 import marytts.MaryInterface;
 import marytts.exceptions.MaryConfigurationException;
-import marytts.exceptions.SynthesisException;
-import marytts.util.data.audio.AudioPlayer;
+
+import javax.sound.sampled.AudioInputStream;
 
 
 public class MaryTTSReader implements TTSReader {
@@ -13,7 +15,8 @@ public class MaryTTSReader implements TTSReader {
     private static final Config config = new Config();
     private final MaryInterface maryTTS;
     private static Object object = new Object();
-    private AudioPlayer player;
+    private final AudioPlayerThread myplayer;
+
 
     public MaryTTSReader() {
         try {
@@ -22,25 +25,31 @@ public class MaryTTSReader implements TTSReader {
             throw new RuntimeException(e);
         }
         maryTTS.setVoice(config.getVoice());
+
+        myplayer = new AudioPlayerThread();
     }
 
     public void play(String sentenceToPlay) {
         synchronized (object) {
-            player = new AudioPlayer();
             try {
-                player.setAudio(maryTTS.generateAudio(sentenceToPlay));
-            } catch (SynthesisException e) {
-                throw new RuntimeException(e);
+                if (!"".equals(sentenceToPlay)) {
+                    AudioInputStream audioInputStream = maryTTS.generateAudio(sentenceToPlay);
+                    myplayer.play(audioInputStream);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            player.setPriority(10);
-            player.run();
         }
     }
 
     @Override
     public void stop() {
-        if (player != null) {
-            player.stop();
+        if (myplayer != null) {
+            try {
+                myplayer.stopPlayer();
+            } catch (JavaLayerException e) {
+                e.printStackTrace();
+            }
         }
     }
 
