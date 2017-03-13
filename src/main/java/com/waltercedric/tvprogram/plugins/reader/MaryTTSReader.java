@@ -18,7 +18,6 @@ package com.waltercedric.tvprogram.plugins.reader;
 
 import com.waltercedric.tvprogram.Config;
 import com.waltercedric.tvprogram.plugins.player.AudioPlayerThread;
-import javazoom.jl.decoder.JavaLayerException;
 import marytts.LocalMaryInterface;
 import marytts.MaryInterface;
 import marytts.exceptions.MaryConfigurationException;
@@ -61,11 +60,7 @@ public class MaryTTSReader implements TTSReader {
     @Override
     public void stop() {
         if (myplayer != null) {
-            try {
-                myplayer.stopPlayer();
-            } catch (JavaLayerException e) {
-                e.printStackTrace();
-            }
+            myplayer.stopPlayer();
         }
     }
 
