@@ -1,7 +1,6 @@
 package com.waltercedric.tvprogram;
 
 import com.pi4j.io.gpio.*;
-import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.waltercedric.tvprogram.guide.TVGuide;
 import com.waltercedric.tvprogram.guide.TVGuideFromTo;
@@ -39,18 +38,15 @@ class Main {
         // provision gpio pin #02 as an input pin with its internal pull down resistor enabled
         final GpioPinDigitalInput digitalButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_DOWN);
         digitalButton.setShutdownOptions(true);
-        digitalButton.addListener(new GpioPinListenerDigital() {
-            @Override
-            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-                System.out.println(" --> Digital: " + event.getPin() + " = " + event.getState());
+        digitalButton.addListener((GpioPinListenerDigital) event -> {
+            System.out.println(" --> Digital: " + event.getPin() + " = " + event.getState());
 
-                if (event.getState().equals(PinState.HIGH)) {
-                    synchronized (object) {
-                        try {
-                            executeNowOnTV();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+            if (event.getState().equals(PinState.HIGH)) {
+                synchronized (object) {
+                    try {
+                        executeNowOnTV();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
