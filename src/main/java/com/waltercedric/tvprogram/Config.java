@@ -26,6 +26,9 @@ public class Config {
     private final String voiceid;
     private final String înteractiveTVGuideRunner;
 
+
+    private final String timeIncrement;
+
     private String sentenceNow_each;
     private String sentenceNow_introduction;
     private final String voice;
@@ -78,6 +81,7 @@ public class Config {
             channelDownPin = props.getProperty("CustomPiRunner.gpio.channel.down");
             timeUpPin = props.getProperty("CustomPiRunner.gpio.time.up");
             timeDownPin = props.getProperty("CustomPiRunner.gpio.time.down");
+            timeIncrement = props.getProperty("InteractiveTVGuide.time.increment");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -195,5 +199,9 @@ public class Config {
         } catch (Exception e) {
             throw new RuntimeException("TTSReader class is wrongly set", e);
         }
+    }
+
+    public int getTimeIncrement() {
+        return Integer.valueOf(timeIncrement);
     }
 }

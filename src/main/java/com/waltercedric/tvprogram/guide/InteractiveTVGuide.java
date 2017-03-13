@@ -29,13 +29,13 @@ public class InteractiveTVGuide implements TVGuide {
     }
 
     public LocalTime timeUp() {
-        this.timeCursor = this.timeCursor.plusMinutes(30);
+        this.timeCursor = this.timeCursor.plusMinutes(config.getTimeIncrement());
 
         return this.timeCursor;
     }
 
     public LocalTime timeDown() {
-        this.timeCursor = this.timeCursor.minusMinutes(30);
+        this.timeCursor = this.timeCursor.minusMinutes(config.getTimeIncrement());
 
         return this.timeCursor;
     }
