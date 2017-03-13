@@ -8,9 +8,9 @@ Click below to see video on youtube
 
 [![TVprogram](https://img.youtube.com/vi/bEzWkPFL3ns/0.jpg)](https://youtu.be/bEzWkPFL3ns)
 
-This application is able to get the TV program and read with a Text to Speech (TTS) engine. 
+This application is able to get the TV program and read with a Text to Speech (TTS) engine on any computer: Windows, Linux and Raspberry PI. 
 
-This is especially useful for blind or disabled people. It run on a raspberry pi, can be used with physical buttons, crontab, command line.
+This is especially useful for blind or disabled people. It run well on a raspberry pi, can be used with physical buttons, crontab, command line.
 
 It use MaryTTS (https://github.com/marytts/marytts), an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI’s Language Technology Lab and the Institute of Phonetics at Saarland University. It is now maintained by the Multimodal Speech Processing Group in the Cluster of Excellence MMCI and DFKI.
 As of version 5.2, MaryTTS supports German, British and American English, French, Italian, Luxembourgish, Russian, Swedish, Telugu, and Turkish; more languages are in preparation. MaryTTS comes with toolkits for quickly adding support for new languages and for building unit selection and HMM-based synthesis voices.
@@ -90,10 +90,29 @@ Do not read aloud text but log sentences to system out.
 TVprogram support many TV Guide implementations.
 
 ## Interactive guide
-Can be used with 4 different buttons on Raspberry PI: time up/down and channel up/down
+You can navigate through the TV Program with 4 buttons: time up/down and channel up/down
+
+There is currently 3 runner available, key `InteractiveTVGuide.runner`:
+
+* `com.waltercedric.tvprogram.pi.runner.CommandLineRunner`    respond to key on keyboard:  time +/- / channel d/f 
+* `com.waltercedric.tvprogram.pi.runner.CustomPiRunner`       run on pi, with your own pin mapping
+* `com.waltercedric.tvprogram.pi.runner.JoyItKeyboardPiRunner`  support JOY-IT keyboard for PI
+
+![joy-it-keyboard.jpg](joy-it-keyboard.jpg)
+
+You can define your own GPIO mapping to function:
+```
+CustomPiRunner.gpio.channel.up=GPIO 2
+CustomPiRunner.gpio.channel.down=GPIO 3
+CustomPiRunner.gpio.time.up=GPIO 4
+CustomPiRunner.gpio.time.down=GPIO 5
+ ```
  
-Start reading first channel at current time, press time up or down for 15 min increment, navigate channel list with 2 another push button
-Any push on one of these button stop reading and move to next time slot or channel.
+It start reading first channel at current time, press time up or down for 30 min increment, navigate channel list with 2 another push button
+Any push on one of these button move to next time slot or channel.
+
+Time increment can be changed
+`InteractiveTVGuide.time.increment=30`
 
 ![interactive.png](interactive.png)
 Recommended to run on a pi with 4 digital buttons

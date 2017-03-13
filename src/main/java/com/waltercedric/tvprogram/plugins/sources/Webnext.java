@@ -40,15 +40,18 @@ public class Webnext implements TVProgramBuilder {
 
     public synchronized List<TVProgram> getTodayProgram() {
         if (cache == null) {
+            System.out.println("Initialize Today TV program cache");
             cacheDate = getDate();
             cache = getProgramList();
         }
 
         if (!getDate().equals(cacheDate)) {
+            System.out.println("Initialize Today TV program cache");
             cacheDate = getDate();
             cache = getProgramList();
         }
 
+        System.out.println("Get Today TV program from cache");
         return cache;
     }
 
