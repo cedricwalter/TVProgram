@@ -20,14 +20,12 @@ public class PollyTTSReader implements TTSReader {
 
     private static final Config config = new Config();
     private static Object object = new Object();
-    private volatile BasicAWSCredentials awsCreds;
     private final AmazonPollyAsync polly;
     private AdvancedPlayer player;
-    private InputStream audioStream;
     private final JavaZoomPlayerThread myplayer;
 
     public PollyTTSReader() {
-        awsCreds = new BasicAWSCredentials(config.getIam_access(), config.getIam_secret());
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials(config.getIam_access(), config.getIam_secret());
 
         polly = AmazonPollyAsyncClient.asyncBuilder()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
@@ -43,7 +41,7 @@ public class PollyTTSReader implements TTSReader {
 
             Future<SynthesizeSpeechResult> synthesizeSpeechResultFuture = polly.synthesizeSpeechAsync(tssRequest);
             try {
-                audioStream = synthesizeSpeechResultFuture.get().getAudioStream();
+                InputStream audioStream = synthesizeSpeechResultFuture.get().getAudioStream();
                 myplayer.play(audioStream);
             } catch (Exception e) {
                 e.printStackTrace();

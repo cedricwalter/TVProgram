@@ -1,7 +1,5 @@
 package com.waltercedric.tvprogram.pi.runner;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
 import com.waltercedric.tvprogram.Config;
 import com.waltercedric.tvprogram.TVReader;
 import com.waltercedric.tvprogram.guide.InteractiveTVGuide;
@@ -14,7 +12,6 @@ import java.time.LocalTime;
 public class JoyItKeyboardPiRunner implements Runner {
 
     private static Object object = new Object();
-    private static GpioController gpio;
     private final TVReader tvReader;
     private final Config config;
     private final JoyItKeyboardDriver keyboard;
@@ -22,7 +19,6 @@ public class JoyItKeyboardPiRunner implements Runner {
     private int channelCursor;
 
     public JoyItKeyboardPiRunner() {
-        gpio = GpioFactory.getInstance();
         tvReader = new TVReader();
         config = new Config();
         keyboard = new JoyItKeyboardDriver();
@@ -33,7 +29,7 @@ public class JoyItKeyboardPiRunner implements Runner {
 
     public void execute() throws InterruptedException {
         TVProgramBuilder builder = config.getTvProgramBuilder();
-        LocalTime now = LocalTime.now();
+
 
         synchronized (object) {
             int keyPressed = keyboard.getKeyPressed();
