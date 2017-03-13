@@ -9,24 +9,22 @@ Click below to see video on youtube
 
 [![TVprogram](https://img.youtube.com/vi/bEzWkPFL3ns/0.jpg)](https://youtu.be/bEzWkPFL3ns)
 
-This application is able to get the TV program and read with a Text to Speech (TTS) engine on any computer: Windows, Linux and Raspberry PI. 
+This java application is able to get the TV program and read with a Text to Speech (TTS) engine on any computer: Windows, Linux, MAC and event platform like the Raspberry PI. 
 
-This is especially useful for blind or disabled people. It run well on a raspberry pi, can be used with physical buttons, crontab, command line.
+This is especially useful for blind or disabled people. It run very well on a raspberry pi and can be used with physical buttons, crontab, command line.
 
-It use MaryTTS (https://github.com/marytts/marytts), an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI’s Language Technology Lab and the Institute of Phonetics at Saarland University. It is now maintained by the Multimodal Speech Processing Group in the Cluster of Excellence MMCI and DFKI.
+It use either Amazon AWS Polly or MaryTTS:
+* Amazon AWS Polly Amazon Polly is a service that turns text into lifelike speech. Polly lets you create applications that talk, enabling you to build entirely new categories of speech-enabled products. Polly is an Amazon AI service that uses advanced deep learning technologies to synthesize speech that sounds like a human voice. https://aws.amazon.com/polly/
+* MaryTTS (https://github.com/marytts/marytts), an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI’s Language Technology Lab and the Institute of Phonetics at Saarland University. It is now maintained by the Multimodal Speech Processing Group in the Cluster of Excellence MMCI and DFKI.
 As of version 5.2, MaryTTS supports German, British and American English, French, Italian, Luxembourgish, Russian, Swedish, Telugu, and Turkish; more languages are in preparation. MaryTTS comes with toolkits for quickly adding support for new languages and for building unit selection and HMM-based synthesis voices.
 
-or
-
-Amazon AWS Polly https://aws.amazon.com/polly/
-
-This java program can run on a raspberry pi 2/3. 
-
 ## Currently
-* TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided, adding yours is easy
+* TVProgram support fetching any RSS feed, a plugin for the french TV program (https://webnext.fr/programme-tv-rss) is provided, adding yours is easy: just `implements TVProgramBuilder`
 * RSS is cached for more efficiency
-* A TVGuide is build and then read by either MaryTTS http://mary.dfki.de/ or Amazon AWS Polly
+* Up to 3 different TVGuide: what on TV now?, what's on TV tonight? and an interactive guide whcih let you navigate on time axis and across channels. 
+* and then read by either MaryTTS http://mary.dfki.de/ or Amazon AWS Polly
 * Time like 13:15 can be converted in English to "Quarter past One" or "treize heure et quart"
+* Support hardware keyboard,
 
 ## Configuration
 
