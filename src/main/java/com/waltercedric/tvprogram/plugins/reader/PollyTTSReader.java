@@ -2,14 +2,18 @@ package com.waltercedric.tvprogram.plugins.reader;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.polly.AmazonPollyClient;
-import com.amazonaws.services.polly.AmazonPollyClientBuilder;
+import com.amazonaws.services.polly.AmazonPollyAsync;
+import com.amazonaws.services.polly.AmazonPollyAsyncClient;
 import com.amazonaws.services.polly.model.OutputFormat;
 import com.amazonaws.services.polly.model.SynthesizeSpeechRequest;
 import com.amazonaws.services.polly.model.SynthesizeSpeechResult;
 import com.waltercedric.tvprogram.Config;
+import com.waltercedric.tvprogram.plugins.player.JavaZoomPlayerThread;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+
+import java.io.InputStream;
+import java.util.concurrent.Future;
 
 
 public class PollyTTSReader implements TTSReader {
@@ -17,16 +21,19 @@ public class PollyTTSReader implements TTSReader {
     private static final Config config = new Config();
     private static Object object = new Object();
     private volatile BasicAWSCredentials awsCreds;
-    private final AmazonPollyClient polly;
+    private final AmazonPollyAsync polly;
     private AdvancedPlayer player;
+    private InputStream audioStream;
+    private final JavaZoomPlayerThread myplayer;
 
     public PollyTTSReader() {
         awsCreds = new BasicAWSCredentials(config.getIam_access(), config.getIam_secret());
 
-        polly = (AmazonPollyClient) AmazonPollyClientBuilder.standard()
+        polly = AmazonPollyAsyncClient.asyncBuilder()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
-                .withRegion(config.getAws_region())
-                .build();
+                .withRegion(config.getAws_region()).build();
+
+        myplayer = new JavaZoomPlayerThread();
     }
 
     public void play(String sentenceToPlay) {
@@ -34,36 +41,22 @@ public class PollyTTSReader implements TTSReader {
             SynthesizeSpeechRequest tssRequest = newRequest();
             tssRequest.setText(sentenceToPlay);
 
-            playSpeechResult(polly.synthesizeSpeech(tssRequest));
+            Future<SynthesizeSpeechResult> synthesizeSpeechResultFuture = polly.synthesizeSpeechAsync(tssRequest);
+            try {
+                audioStream = synthesizeSpeechResultFuture.get().getAudioStream();
+                myplayer.play(audioStream);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public void stop() {
-        if (player != null) {
-            player.stop();
-        }
-    }
-
-    private void playSpeechResult(SynthesizeSpeechResult speechResult) {
         try {
-            player = new AdvancedPlayer(speechResult.getAudioStream(),
-                    javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice());
-//            player.setPlayBackListener(new PlaybackListener() {
-//                @Override
-//                public void playbackStarted(PlaybackEvent evt) {
-//                    System.out.println("Polly Playback started");
-//                }
-//
-//                @Override
-//                public void playbackFinished(PlaybackEvent evt) {
-//                    System.out.println("Polly Playback finished");
-//                }
-//            });
-
-            player.play();
+            myplayer.stopPlayer();
         } catch (JavaLayerException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
