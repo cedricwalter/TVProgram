@@ -11,11 +11,11 @@ import java.time.LocalTime;
 
 public class JoyItKeyboardPiRunner implements Runner {
 
-    private static Object object = new Object();
+    private static final Object object = new Object();
     private final TVReader tvReader;
     private final Config config;
     private final JoyItKeyboardDriver keyboard;
-    private LocalTime now;
+    private final LocalTime now;
     private int channelCursor;
 
     public JoyItKeyboardPiRunner() {

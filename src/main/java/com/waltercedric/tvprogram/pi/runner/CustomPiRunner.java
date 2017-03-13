@@ -12,7 +12,7 @@ import java.time.LocalTime;
 
 public class CustomPiRunner implements Runner {
 
-    private static Object object = new Object();
+    private static final Object object = new Object();
     private static GpioController gpio;
     private final TVReader tvReader;
     private final Config config;

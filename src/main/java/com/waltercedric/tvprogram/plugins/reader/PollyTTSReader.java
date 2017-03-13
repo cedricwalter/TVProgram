@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
 public class PollyTTSReader implements TTSReader {
 
     private static final Config config = new Config();
-    private static Object object = new Object();
+    private static final Object object = new Object();
     private final AmazonPollyAsync polly;
     private AdvancedPlayer player;
     private final JavaZoomPlayerThread myplayer;

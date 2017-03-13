@@ -14,7 +14,7 @@ public class MaryTTSReader implements TTSReader {
 
     private static final Config config = new Config();
     private final MaryInterface maryTTS;
-    private static Object object = new Object();
+    private static final Object object = new Object();
     private final AudioPlayerThread myplayer;
 
 

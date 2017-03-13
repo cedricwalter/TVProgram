@@ -12,7 +12,7 @@ import java.time.LocalTime;
 
 class Main {
 
-    private static Object object = new Object();
+    private static final Object object = new Object();
     private static final Config config = new Config();
 
     public static void main(String[] args) throws Exception {

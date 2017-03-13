@@ -5,6 +5,8 @@
 
 ## Introduction
 
+For People with visual impairments it is difficult or impossible to use on-screen TV programme guides, though watching TV remains important to them.
+
 Click below to see video on youtube
 
 [![TVprogram](https://img.youtube.com/vi/bEzWkPFL3ns/0.jpg)](https://youtu.be/bEzWkPFL3ns)
@@ -12,6 +14,8 @@ Click below to see video on youtube
 This java application is able to get the TV program and read with a Text to Speech (TTS) engine on any computer: Windows, Linux, MAC and event platform like the Raspberry PI. 
 
 This is especially useful for blind or disabled people. It run very well on a raspberry pi and can be used with physical buttons, crontab, command line.
+
+
 
 It use either Amazon AWS Polly or MaryTTS:
 * Amazon AWS Polly Amazon Polly is a service that turns text into lifelike speech. Polly lets you create applications that talk, enabling you to build entirely new categories of speech-enabled products. Polly is an Amazon AI service that uses advanced deep learning technologies to synthesize speech that sounds like a human voice. https://aws.amazon.com/polly/
