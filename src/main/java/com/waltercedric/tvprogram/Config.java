@@ -79,6 +79,12 @@ public class Config {
 
             iam_access = props.getProperty("TVReader.PollyTTSReader.IAM-access");
             iam_secret = props.getProperty("TVReader.PollyTTSReader.IAM-secret");
+            if (ttsReader.contains("PollyTTSReader")) {
+                if ("".equals(iam_access) || "".equals(iam_secret)) {
+                    throw new Exception("if you want to use Amazon Polly you have to provide 'TVReader.PollyTTSReader.IAM-access' and 'TVReader.PollyTTSReader.IAM-secret' value");
+                }
+            }
+
             aws_region = props.getProperty("TVReader.PollyTTSReader.region");
             voiceid = props.getProperty("TVReader.PollyTTSReader.voiceid");
 
