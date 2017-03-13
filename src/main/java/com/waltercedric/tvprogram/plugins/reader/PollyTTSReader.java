@@ -10,7 +10,6 @@ import com.amazonaws.services.polly.model.SynthesizeSpeechResult;
 import com.waltercedric.tvprogram.Config;
 import com.waltercedric.tvprogram.plugins.player.JavaZoomPlayerThread;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import java.io.InputStream;
 import java.util.concurrent.Future;
@@ -21,7 +20,6 @@ public class PollyTTSReader implements TTSReader {
     private static final Config config = new Config();
     private static final Object object = new Object();
     private final AmazonPollyAsync polly;
-    private AdvancedPlayer player;
     private final JavaZoomPlayerThread myplayer;
 
     public PollyTTSReader() {
