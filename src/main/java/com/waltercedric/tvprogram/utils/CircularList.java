@@ -2,7 +2,7 @@ package com.waltercedric.tvprogram.utils;
 
 import java.util.ArrayList;
 
-// do not work for mutable list, only support ArrayList, used onyl for channels
+// do not work for mutable list, only support ArrayList, used only for channels
 public class CircularList<E> extends ArrayList<E> {
 
     @Override

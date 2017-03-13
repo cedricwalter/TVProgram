@@ -15,21 +15,19 @@ public class JoyItKeyboardPiRunner implements Runner {
     private final TVReader tvReader;
     private final Config config;
     private final JoyItKeyboardDriver keyboard;
-    private final LocalTime now;
+    private LocalTime now;
     private int channelCursor;
 
     public JoyItKeyboardPiRunner() {
         tvReader = new TVReader();
         config = new Config();
         keyboard = new JoyItKeyboardDriver();
-
         channelCursor = 0;
         now = LocalTime.now();
     }
 
     public void execute() throws InterruptedException {
         TVProgramBuilder builder = config.getTvProgramBuilder();
-
 
         synchronized (object) {
             int keyPressed = keyboard.getKeyPressed();

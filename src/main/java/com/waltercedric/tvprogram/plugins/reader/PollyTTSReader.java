@@ -9,7 +9,6 @@ import com.amazonaws.services.polly.model.SynthesizeSpeechRequest;
 import com.amazonaws.services.polly.model.SynthesizeSpeechResult;
 import com.waltercedric.tvprogram.Config;
 import com.waltercedric.tvprogram.plugins.player.JavaZoomPlayerThread;
-import javazoom.jl.decoder.JavaLayerException;
 
 import java.io.InputStream;
 import java.util.concurrent.Future;
@@ -49,11 +48,7 @@ public class PollyTTSReader implements TTSReader {
 
     @Override
     public void stop() {
-        try {
-            myplayer.stopPlayer();
-        } catch (JavaLayerException e) {
-            e.printStackTrace();
-        }
+        myplayer.stopPlayer();
     }
 
     private SynthesizeSpeechRequest newRequest() {

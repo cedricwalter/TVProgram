@@ -1,6 +1,5 @@
 package com.waltercedric.tvprogram.plugins.player;
 
-import javazoom.jl.decoder.JavaLayerException;
 import marytts.util.data.audio.AudioPlayer;
 
 import javax.sound.sampled.AudioInputStream;
@@ -16,7 +15,7 @@ public class AudioPlayerThread implements Runnable {
         }
     }
 
-    public void play(AudioInputStream audioStream) throws JavaLayerException {
+    public void play(AudioInputStream audioStream) {
         stopPlayer();
 
         player = new AudioPlayer();
