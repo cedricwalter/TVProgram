@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2017-2017 by Cédric Walter - www.cedricwalter.com
- * <p>
+ *
  * TVProgram is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p>
+ *
  * TVProgram is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p>
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -18,6 +18,7 @@ package com.waltercedric.tvprogram;
 
 import com.waltercedric.tvprogram.pi.runner.Runner;
 import com.waltercedric.tvprogram.plugins.mapping.TimeToTextConverter;
+import com.waltercedric.tvprogram.plugins.player.Player;
 import com.waltercedric.tvprogram.plugins.reader.TTSReader;
 import com.waltercedric.tvprogram.plugins.sources.TVProgramBuilder;
 
@@ -49,6 +50,7 @@ public class Config {
     private final String joyItChannelDown;
     private final String joyItTimeUp;
     private final String joyItTimeDown;
+    private final String player;
 
     private String sentenceNow_each;
     private String sentenceNow_introduction;
@@ -116,6 +118,8 @@ public class Config {
             joyItTimeDown = props.getProperty("JoyItKeyboardPiRunner.time.down");
 
             timeIncrement = props.getProperty("InteractiveTVGuide.time.increment");
+
+            player = props.getProperty("AudioPlayer");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -232,6 +236,14 @@ public class Config {
             return (Runner) Class.forName(înteractiveTVGuideRunner).newInstance();
         } catch (Exception e) {
             throw new RuntimeException("TTSReader class is wrongly set", e);
+        }
+    }
+
+    public Player getPlayer() {
+        try {
+            return (Player) Class.forName(player).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Player class is wrongly set", e);
         }
     }
 
