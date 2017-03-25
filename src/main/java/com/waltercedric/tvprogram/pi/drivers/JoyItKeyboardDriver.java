@@ -142,4 +142,8 @@ public class JoyItKeyboardDriver {
     public int getKeyPressed() {
         return keyPressed;
     }
+
+    public void shutdown() {
+        gpio.shutdown();
+    }
 }

@@ -123,8 +123,13 @@ public class CustomPiRunner implements Runner {
         });
 
         System.out.println("Now listening to PIN changes, keep program running until user aborts (CTRL-C)");
-        while (true) {
-            Thread.sleep(200);
+
+        try {
+            while (true) {
+                Thread.sleep(200);
+            }
+        } finally {
+            gpio.shutdown();
         }
     }
 
