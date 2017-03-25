@@ -50,6 +50,16 @@ public class PollyTTSReader implements TTSReader {
     public void play(String sentenceToPlay) {
         synchronized (object) {
             SynthesizeSpeechRequest tssRequest = newRequest();
+
+            // TextLengthExceededException
+            // The value of the "Text" parameter is longer than the accepted limits. The limit for input text is a
+            // maximum of 3000 characters total, of which no more than 1500 can be billed characters.
+            // SSML tags are not counted as billed characters.
+            // HTTP Status Code: 400
+            if (sentenceToPlay.length() > 3000) {
+                sentenceToPlay = sentenceToPlay.substring(0, 2999);
+            }
+
             tssRequest.setText(sentenceToPlay);
 
             Future<SynthesizeSpeechResult> synthesizeSpeechResultFuture = polly.synthesizeSpeechAsync(tssRequest);
