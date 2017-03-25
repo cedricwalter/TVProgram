@@ -27,14 +27,21 @@ public class TimeToFrenchTest {
     public void with() {
         TimeToFrench timeToFrench = new TimeToFrench();
 
-        assertThat(timeToFrench.convertTimeToText("12:12"), is("douze heure douze"));
-        assertThat(timeToFrench.convertTimeToText("12:30"), is("douze heure et demi"));
-        assertThat(timeToFrench.convertTimeToText("12:15"), is("douze heure et quart"));
-        assertThat(timeToFrench.convertTimeToText("12:45"), is("treize heure moins le quart"));
-        assertThat(timeToFrench.convertTimeToText("12:00"), is("douze heure pile"));
+        assertThat(timeToFrench.convertTimeToText("12:00"), is("midi"));
+        assertThat(timeToFrench.convertTimeToText("12:12"), is("douze heures douze"));
+        assertThat(timeToFrench.convertTimeToText("12:30"), is("douze heures et demie"));
+        assertThat(timeToFrench.convertTimeToText("12:15"), is("douze heures et quart"));
+        assertThat(timeToFrench.convertTimeToText("12:45"), is("treize heures moins le quart"));
+        assertThat(timeToFrench.convertTimeToText("13:00"), is("treize heures pile"));
         assertThat(timeToFrench.convertTimeToText("23:45"), is("minuit moins le quart"));
-        assertThat(timeToFrench.convertTimeToText("17:45"), is("dix huit heure moins le quart"));
-        assertThat(timeToFrench.convertTimeToText("9:45"), is("dix heure moins le quart"));
+        assertThat(timeToFrench.convertTimeToText("17:45"), is("dix huit heures moins le quart"));
+        assertThat(timeToFrench.convertTimeToText("9:45"), is("dix heures moins le quart"));
+        assertThat(timeToFrench.convertTimeToText("18:20"), is("dix huit heures vingt"));
+        assertThat(timeToFrench.convertTimeToText("00:00"), is("minuit"));
+        assertThat(timeToFrench.convertTimeToText("00:15"), is("minuit et quart"));
+        assertThat(timeToFrench.convertTimeToText("00:30"), is("minuit et demie"));
+        assertThat(timeToFrench.convertTimeToText("00:45"), is("une heures moins le quart"));
+        assertThat(timeToFrench.convertTimeToText("00:58"), is("minuit cinquante huit"));
     }
 
 }
